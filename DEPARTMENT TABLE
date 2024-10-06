@@ -3,5 +3,5 @@ CREATE TABLE DEPARTMENT(
     DepName     VARCHAR(50),
     DepLocation VARCHAR(50),
     PRIMARY KEY (DepID)
-    f
+    
 );
