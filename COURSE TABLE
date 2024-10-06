@@ -1,3 +1,9 @@
 CREATE TABLE COURSE(
-    
-)
+    CourseID VARCHAR(255),
+    Course_Name VARCHAR(255),
+    Credit       INTEGER,
+    Theory       BOOLEAN,
+    Practical    BOOLEAN,
+    PRIMARY KEY (CourseID),
+    -- FOREIGN KEY (DepID) REFERENCES DEPARTMENT(DepID)
+);
