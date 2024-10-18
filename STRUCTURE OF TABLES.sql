@@ -112,11 +112,22 @@ COURSE_UNIT(
  Course_ID  VARCHAR(20),
  C_Name    VARCHAR(50),
  Credit    INT,
- C_Type    VARCHAR(15) NULL,
- PRIMARY_KEY (Course_ID),
- FOREIGN KEY(DEP_ID) REFERENCES DEPARTMENT(DEP_ID)
- 
+ C_Type    VARCHAR(15),
+ DEP_ID VARCHAR(20),
+ PRIMARY KEY (Course_ID),
+ FOREIGN KEY(DEP_ID) REFERENCES DEPARTMENT(Dep_ID)
 );
+
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Course_ID | varchar(20) | NO   | PRI | NULL    |       |
+| C_Name    | varchar(50) | YES  |     | NULL    |       |
+| Credit    | int(11)     | YES  |     | NULL    |       |
+| C_Type    | varchar(15) | YES  |     | NULL    |       |
+| DEP_ID    | varchar(20) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
 -------------------------------------------------------------------
 
 ELIGIBILITY(
@@ -124,18 +135,38 @@ ELIGIBILITY(
  E_Status  VARCHAR(20),
  PRIMARY KEY(ELI_ID)
 );
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| ELI_ID   | varchar(20) | NO   | PRI | NULL    |       |
+| E_Status | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
 -------------------------------------------------------------------
 
 STUDENT(
  Stu_ID   VARCHAR(20),
  S_Status VARCHAR(20),
- GPA   DECIMAL(1,2),
+ GPA DECIMAL(4,2),  
+ Dep_ID VARCHAR(20), 
+ ELI_ID VARCHAR(20),
  PRIMARY KEY(Stu_ID),
  FOREIGN KEY(Stu_ID) REFERENCES USER(User_Id),
  FOREIGN KEY(Dep_ID) REFERENCES DEPARTMENT(Dep_ID),
  FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID) 
- 
 );
+
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| Stu_ID   | varchar(20)  | NO   | PRI | NULL    |       |
+| S_Status | varchar(20)  | YES  |     | NULL    |       |
+| GPA      | decimal(4,2) | YES  |     | NULL    |       |
+| Dep_ID   | varchar(20)  | YES  | MUL | NULL    |       |
+| ELI_ID   | varchar(20)  | YES  | MUL | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+
 --------------------------------------------------------------------
 
 EXAM_MARK(
@@ -149,21 +180,48 @@ EXAM_MARK(
  mid_Practical DECIMAL(5,2),
  end_Theory    DECIMAL(5,2),
  end_Practical  DECIMAL(5,2),
+ ELI_ID VARCHAR(20), 
  PRIMARY KEY(Stu_ID, Course_ID),
- FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_Id),
+ FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID),
  FOREIGN KEY(Course_ID) REFERENCES COURSE_UNIT(Course_ID),
  FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID)
 );
+
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| Stu_ID        | varchar(20)  | NO   | PRI | NULL    |       |
+| Course_ID     | varchar(20)  | NO   | PRI | NULL    |       |
+| Quiz_1        | decimal(5,2) | YES  |     | NULL    |       |
+| Quiz_2        | decimal(5,2) | YES  |     | NULL    |       |
+| Quiz_3        | decimal(5,2) | YES  |     | NULL    |       |
+| Assesment     | decimal(5,2) | YES  |     | NULL    |       |
+| mid_Theory    | decimal(5,2) | YES  |     | NULL    |       |
+| mid_Practical | decimal(5,2) | YES  |     | NULL    |       |
+| end_Theory    | decimal(5,2) | YES  |     | NULL    |       |
+| end_Practical | decimal(5,2) | YES  |     | NULL    |       |
+| ELI_ID        | varchar(20)  | YES  | MUL | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
 
 ----------------------------------------------------------------------
 MEDICAL(
  MED_ID  VARCHAR(20),
  M_Description  VARCHAR(50),
  SubmitDate  DATE,
- Stu_ID  CHAR(20),
+ STU_ID  VARCHAR(20),
  PRIMARY KEY(Med_ID),
- FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID)
+ FOREIGN KEY(STU_ID) REFERENCES STUDENT(Stu_ID)
 );
+
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| MED_ID        | varchar(20) | NO   | PRI | NULL    |       |
+| M_Description | varchar(50) | YES  |     | NULL    |       |
+| SubmitDate    | date        | YES  |     | NULL    |       |
+| STU_ID        | varchar(20) | YES  | MUL | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
 -----------------------------------------------------------------------
 
 ATTENDENCE(
@@ -171,13 +229,26 @@ ATTENDENCE(
  Stu_ID  VARCHAR(20),
  A_Status VARCHAR(20),
  A_DATE     DATE,
+ DEAN_ID VARCHAR(20),
+ MED_ID VARCHAR(20),
  PRIMARY KEY(Course_ID, Stu_ID),
  FOREIGN KEY(Course_ID) REFERENCES COURSE_UNIT(Course_ID),
  FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_Id),
  FOREIGN KEY(DEAN_ID) REFERENCES DEAN(DEAN_Id),
  FOREIGN KEY(MED_ID) REFERENCES MEDICAL(MED_Id)
- 
 );
+
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Course_ID | varchar(20) | NO   | PRI | NULL    |       |
+| Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
+| A_Status  | varchar(20) | YES  |     | NULL    |       |
+| A_DATE    | date        | YES  |     | NULL    |       |
+| DEAN_ID   | varchar(20) | YES  | MUL | NULL    |       |
+| MED_ID    | varchar(20) | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
 ------------------------------------------------------------------------
 
 TO_Process_Attendence(
@@ -240,7 +311,7 @@ STU_Has_ELIG(
 
 -------------------------------------------------------------------------------
 
-ATTEN_Depend_ELIG(
+ATTENDENCE_ELIGIBILITY(
  ELI_ID VARCHAR(20),
  COURSE_ID VARCHAR(20),
  Stu_ID VARCHAR(20),
