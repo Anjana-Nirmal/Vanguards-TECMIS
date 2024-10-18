@@ -1,7 +1,6 @@
 CREATE TABLE DEPARTMENT(
-    DepID    VARCHAR(50),
-    DepName     VARCHAR(50),
-    DepLocation VARCHAR(50),
-    PRIMARY KEY (DepID)
+     Dep_ID  CHAR(20),
+     D_Name VARCHAR(50),
+     PRIMARY KEY(Dep_ID)
     
 );
