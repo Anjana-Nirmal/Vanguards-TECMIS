@@ -1,7 +1,7 @@
 CREATE TABLE ATTENDENCE(
-   Course_ID CHAR(20),
-   Stu_ID CHAR(20),
+   Course_ID  CHAR(20),
+   Stu_ID  CHAR(20),
    A_Status VARCHAR(20),
-   DATE     DATE,
-   PRIMARY KEY(Course_ID, Stu_ID),
+   A_DATE     DATE,
+   PRIMARY KEY(Course_ID, Stu_ID)
 );
