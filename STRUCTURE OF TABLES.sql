@@ -88,7 +88,7 @@ TECHNICAL_OFFICER(
 +--------+-------------+------+-----+---------+-------+
 
 ------------------------------------------------------------------
-CREATE TABLE DEPARTMENT (
+ DEPARTMENT (
     Dep_ID VARCHAR(20),
     D_Name VARCHAR(50),
     DEAN_ID VARCHAR(20),
