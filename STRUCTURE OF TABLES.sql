@@ -251,18 +251,27 @@ ATTENDENCE(
 
 ------------------------------------------------------------------------
 
-TO_Process_Attendence(
+TO_ATTENDENCE(
  TO_ID  VARCHAR(20),
  COURSE_ID VARCHAR(20),
  Stu_ID VARCHAR(20),
  PRIMARY KEY(TO_ID, Course_ID, Stu_ID),
- FOREIGN KEY(TO_ID) REFERENCES TO(TO_ID),
+ FOREIGN KEY(TO_ID) REFERENCES TECHNICAL_OFFICER(TO_ID),
  FOREIGN KEY(COURSE_ID) REFERENCES COURSE_UNIT(Course_ID),
  FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID)
 
 );
+
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| TO_ID     | varchar(20) | NO   | PRI | NULL    |       |
+| COURSE_ID | varchar(20) | NO   | PRI | NULL    |       |
+| Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
 --------------------------------------------------------------------------
-LEC_Works_Department(
+LECTURER_DEPARTMENT(
   LEC_ID VARCHAR(20),
   Dep_ID VARCHAR(20),
   PRIMARY KEY(LEC_ID, Dep_ID),
@@ -270,8 +279,15 @@ LEC_Works_Department(
   FOREIGN KEY(Dep_ID) REFERENCES DEPARTMENT(Dep_ID)
 );
 
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| LEC_ID | varchar(20) | NO   | PRI | NULL    |       |
+| Dep_ID | varchar(20) | NO   | PRI | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
 ---------------------------------------------------------------------------
-LEC_Conduct_COURSE(
+LECTURER_COURSE(
  LEC_ID VARCHAR(20),
  COURSE_ID VARCHAR(20),
  Lec_in_charge VARCHAR(20),
@@ -281,8 +297,17 @@ LEC_Conduct_COURSE(
  FOREIGN KEY(COURSE_ID) REFERENCES COURSE_UNIT(Course_ID)
 );
 
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| LEC_ID        | varchar(20)  | NO   | PRI | NULL    |       |
+| COURSE_ID     | varchar(20)  | NO   | PRI | NULL    |       |
+| Lec_in_charge | varchar(20)  | YES  |     | NULL    |       |
+| Lec_hours     | decimal(5,2) | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+
 -----------------------------------------------------------------------------
-LEC_Teches_STU(
+LECTURER_STUDENT(
  LEC_ID VARCHAR(20),
  Stu_ID VARCHAR(20),
  PRIMARY KEY(LEC_ID, Stu_ID),
@@ -290,8 +315,15 @@ LEC_Teches_STU(
  FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID)
 );
 
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| LEC_ID | varchar(20) | NO   | PRI | NULL    |       |
+| Stu_ID | varchar(20) | NO   | PRI | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+
 -----------------------------------------------------------------------------
-STU_Learns_Course(
+STUDENT_COURSE(
  Stu_ID VARCHAR(20),
  COURSE_ID VARCHAR(20),
  PRIMARY KEY(Stu_ID, Course_ID),
@@ -299,15 +331,29 @@ STU_Learns_Course(
  FOREIGN KEY(COURSE_ID) REFERENCES COURSE_UNIT(Course_ID)
 );
 
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
+| COURSE_ID | varchar(20) | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+
 -------------------------------------------------------------------------------
 
-STU_Has_ELIG(
+STUDENT_ELIGIBILITY(
  Stu_ID VARCHAR(20),
  ELI_ID VARCHAR(20),
  PRIMARY KEY(Stu_ID, ELI_ID),
  FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID),
  FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID)
 );
+
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Stu_ID | varchar(20) | NO   | PRI | NULL    |       |
+| ELI_ID | varchar(20) | NO   | PRI | NULL    |       |
++--------+-------------+------+-----+---------+-------+
 
 -------------------------------------------------------------------------------
 
@@ -320,3 +366,11 @@ ATTENDENCE_ELIGIBILITY(
  FOREIGN KEY(COURSE_ID) REFERENCES COURSE_UNIT(Course_ID),
  FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID)
 );
+
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| ELI_ID    | varchar(20) | NO   | PRI | NULL    |       |
+| COURSE_ID | varchar(20) | NO   | PRI | NULL    |       |
+| Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
