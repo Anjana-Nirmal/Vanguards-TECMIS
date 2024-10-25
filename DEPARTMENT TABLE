@@ -13,5 +13,5 @@ VALUES
 ('D_ICT', 'ICT Department', 'DEAN001', 'ADMIN001'),
 ('D_ET', 'ET Department', 'DEAN001', 'ADMIN002'),
 ('D_BST', 'BST Department', 'DEAN001', 'ADMIN003');
--- ('D_MULTI' , 'Multideciplinary Department','DEAN001','ADMIN004');
+('D_MULTI' , 'Multideciplinary Department','DEAN001','ADMIN004');
 
