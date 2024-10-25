@@ -9,4 +9,5 @@ Create table USER(
  Contact_no VARCHAR(20),
  Email VARCHAR(50),
  PRIMARY KEY(User_Id)
+ 
 );
