@@ -229,6 +229,7 @@ ATTENDENCE(
  Stu_ID  VARCHAR(20),
  A_Status VARCHAR(20),
  A_DATE     DATE,
+ A_Type   VARCHAR(20),
  DEAN_ID VARCHAR(20),
  MED_ID VARCHAR(20),
  PRIMARY KEY(Course_ID, Stu_ID),
@@ -245,6 +246,7 @@ ATTENDENCE(
 | Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
 | A_Status  | varchar(20) | YES  |     | NULL    |       |
 | A_DATE    | date        | YES  |     | NULL    |       |
+| A_Type    | varchar(20) | YES  |     | NULL    |       |
 | DEAN_ID   | varchar(20) | YES  | MUL | NULL    |       |
 | MED_ID    | varchar(20) | YES  | MUL | NULL    |       |
 +-----------+-------------+------+-----+---------+-------+
