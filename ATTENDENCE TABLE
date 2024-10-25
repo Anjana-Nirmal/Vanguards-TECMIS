@@ -471,29 +471,29 @@ VALUES
   ------------------------------------4th week -----------------------------------------------
 -- ------------------------Monday
 -- Theory 
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1348','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1349','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1350','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1351','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1352','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1353','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1354','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1355','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1356','Present','2024-08-26','Theory','DEAN001',NULL),
+('ICT1233', 'TG/2022/1357','Present','2024-08-26','Theory','DEAN001',NULL),
 
 
 -- Practical
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
-('ICT1233', 'TG/2022/1350', 'Present', '2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1348', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1349', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1350', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1351', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1352', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1353', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1354', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1355', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1356', 'Present','2024-08-26','Practical','DEAN001',NULL),
+('ICT1233', 'TG/2022/1357', 'Present','2024-08-26','Practical','DEAN001',NULL),
 
 
 
@@ -529,17 +529,17 @@ VALUES
 
 -- -----------------------Wednesday
 -- Theory 
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
-('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28', 'DEAN001', NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
+('TMS1233', 'TG/2022/1350', 'Present', '2024-08-28','Theory','DEAN001',NULL),
 
 
 
