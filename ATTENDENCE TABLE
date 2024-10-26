@@ -392,8 +392,6 @@ VALUES
 
 
 
-
-
 --------------------------Thursday
 -- THeory 
 ('ICT1242', 'TG/2022/1348', 'Present', '2024-08-22','Theory','DEAN001', NULL),
@@ -539,8 +537,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-08-28','Theory','DEAN001',NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-08-28','Theory','DEAN001',NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-08-28','Theory','DEAN001',NULL),
-
-
 
 
 
@@ -976,8 +972,6 @@ VALUES
 
 
 
-
-
 -- -----------------------Wednesday
 -- THeory 
 ('TMS1233', 'TG/2022/1348', 'Present', '2024-09-18','Theory', 'DEAN001', NULL),
@@ -990,8 +984,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-09-18','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-09-18','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-09-18','Theory', 'DEAN001', NULL),
-
-
 
 
 
@@ -1123,8 +1115,6 @@ VALUES
 ('ICT1222', 'TG/2022/1355', 'Present', '2024-09-24','Practical', 'DEAN001', NULL),
 ('ICT1222', 'TG/2022/1356', 'Present', '2024-09-24','Practical', 'DEAN001', NULL),
 ('ICT1222', 'TG/2022/1357', 'Present', '2024-09-24','Practical', 'DEAN001', NULL),
-
-
 
 
 
@@ -1279,8 +1269,6 @@ VALUES
 
 
 
-
-
 -- -----------------------Wednesday
 -- THeory 
 ('TMS1233', 'TG/2022/1348', 'Present', '2024-10-02','Theory', 'DEAN001', NULL),
@@ -1293,8 +1281,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-10-02','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-10-02','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-10-02','Theory', 'DEAN001', NULL),
-
-
 
 
 
@@ -1434,8 +1420,6 @@ VALUES
 
 
 
-
-
 -- -----------------------Wednesday
 -- THeory 
 ('TMS1233', 'TG/2022/1348', 'Present', '2024-10-09','Theory', 'DEAN001', NULL),
@@ -1448,8 +1432,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-10-09','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-10-09','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-10-09','Theory', 'DEAN001', NULL),
-
-
 
 
 
@@ -1587,8 +1569,6 @@ VALUES
 
 
 
-
-
 -- -----------------------Wednesday
 -- THeory 
 ('TMS1233', 'TG/2022/1348', 'Present', '2024-10-16','Theory', 'DEAN001', NULL),
@@ -1601,8 +1581,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-10-16','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-10-16','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-10-16','Theory', 'DEAN001', NULL),
-
-
 
 
 
@@ -1887,9 +1865,6 @@ VALUES
 
 
 
-
-
-
 -- -----------------------Wednesday
 -- THeory 
 ('TMS1233', 'TG/2022/1348', 'Present', '2024-10-30','Theory', 'DEAN001', NULL),
@@ -1902,8 +1877,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-10-30','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-10-30','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-10-30','Theory', 'DEAN001', NULL),
-
-
 
 
 
@@ -2041,9 +2014,6 @@ VALUES
 
 
 
-
-
-
 -- -----------------------Wednesday
 -- THeory 
 ('TMS1233', 'TG/2022/1348', 'Present', '2024-11-06','Theory', 'DEAN001', NULL),
@@ -2056,9 +2026,6 @@ VALUES
 ('TMS1233', 'TG/2022/1355', 'Present', '2024-11-06','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1356', 'Present', '2024-11-06','Theory', 'DEAN001', NULL),
 ('TMS1233', 'TG/2022/1357', 'Present', '2024-11-06','Theory', 'DEAN001', NULL),
-
-
-
 
 
 
