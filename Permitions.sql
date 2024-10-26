@@ -3,9 +3,9 @@
 
 CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'admin_123';
 
-GRANT ALL PRIVILEGES ON vanguards.*
-TO 'admin'@'localhost
-WHITH GRANT OPTION ;
+GRANT ALL PRIVILEGES ON vanguards.* 
+TO 'admin'@'localhost'
+WITH GRANT OPTION ;
 
 FLUSH PRIVILEGES;
 
@@ -72,6 +72,9 @@ SHOW GRANTS FOR 'Lecturer'@'localhost';
 SHOW GRANTS FOR 'Technical_Officer'@'localhost';
 SHOW GRANTS FOR 'Student'@'localhost';
 
+USE mysql;
+SELECT user,host FROM user;
+exit;
 
 mysql -u Admin -p
 mysql -u Dean -p
