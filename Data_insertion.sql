@@ -1,4 +1,23 @@
-INSERT INTO exam_mark
+
+--Medical Table
+
+INSERT INTO MEDICAL
+(MED_ID,STU_ID,Course_ID,M_Description,SubmitDate)
+
+VALUES
+('MED001','TG/2022/1346','ICT1212','Anxiety or Panic Disorder','2024-08-21'),
+('MED002','TG/2022/1352','ICT1233','Migraine Attacks','2024-08-28'),
+('MED003','TG/2022/1349','ICT1242','Gastroenteritis, Stomach Flu','2024-09-10'),
+('MED004','TG/2021/1174','ICT1212','Asthma Exacerbation','2024-09-18'),
+('MED005','TG/2022/1358','ICT1253','Preventing Contagion','2024-09-30'),
+('MED006','TG/2022/1350','TCS1212','Flu or Severe Cold','2024-10-02'),
+('MED007','TG/2022/1352','ICT1212','Migraine Attacks','2024-10-12'),
+('MED008','TG/2022/1354','ICT1233','Gastroenteritis, Stomach Flu','2024-10-24');
+
+
+--Exam_Mark_Table
+
+INSERT INTO EXAM_MARK
 (Stu_ID,Course_ID,Quiz_1,Quiz_2,Quiz_3,Assesment,mid_Theory,mid_Practical,end_Theory,end_Practical,ELI_ID)
 VALUES
 ('TG/2019/1018','ICT1212',68,72.3,70,55.5,64.4,NULL,66,NULL,'EE'),
@@ -175,3 +194,26 @@ VALUES
 ('TG/2022/1357','ENG1222',44,35.8,56,47,52.5,NULL,32.7,NULL,'NE'),
 ('TG/2022/1358','ENG1222',68,72.3,70,55.5,64.4,NULL,66,NULL,'EE'),
 ('TG/2022/1359','ENG1222',42.5,56.9,46,78.6,97,NULL,74,NULL,'EE');
+
+
+--Technical Officer Table
+
+INSERT INTO TECHNICAL_OFFICER
+(TO_ID, T_Role)
+VALUES
+('T001','Systems Administrator'),
+('T002','Network Engineer'),
+('T003','Technical Support Specialist'),
+('T004','Systems Administrator'),
+('T005','Database Administrator'),
+('T006','Security Officer'),
+('T007','Technical Support Specialist'),
+('T008','Security Officer');
+
+
+--DEAN Table
+
+INSERT INTO DEAN
+(DEAN_ID)
+VALUES
+('DEAN001');
