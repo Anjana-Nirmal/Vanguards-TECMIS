@@ -217,3 +217,23 @@ INSERT INTO DEAN
 (DEAN_ID)
 VALUES
 ('DEAN001');
+
+
+--LECTURER COURSE Table
+
+INSERT INTO LECTURER_COURSE
+(LEC_ID,COURSE_ID,Lec_in_charge,Lec_hours)
+
+VALUES
+('L001','ICT1233','Chinthaka Chandrakumara',60),
+('L002','ICT1212','W.Chandradasa Perera',30),
+('L003','ICT1242','L.Manjula Vithanapathirana',30),
+('L004','ICT1222','J.M.Samudra Senarath',60),
+('L005','ENG1222','S.D.Indiaka Divakara',30),
+('L006','ICT1233','Chinthaka Chandrakumara',60),
+('L007','ENG1222','S.D.Indiaka Divakara',30),
+('L008','ICT1253','B.A.Nipuna Heminda',60),
+('L009','TMS1233','J.Uditha Garusinghe',45),
+('L010','ENG1222','S.D.Indiaka Divakara',30),
+('L011','TMS1233','J.Uditha Garusinghe',45),
+('L012','TCS1212','G.A.Madara Karunarathne',30);
