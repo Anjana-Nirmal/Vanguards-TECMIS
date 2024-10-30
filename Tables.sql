@@ -1,4 +1,4 @@
-CREATE Course_Unit(
+CREATE COURSE_UNIT(
     Course_ID CHAR(10)N PRIMARY KEY,
     Course_Name VARCHAR(25),
     Course_Credit INT(5),
