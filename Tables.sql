@@ -1,12 +1,19 @@
-CREATE COURSE_UNIT(
-    Course_ID CHAR(10)N PRIMARY KEY,
-    Course_Name VARCHAR(25),
+CREATE TABLE COURSE_UNIT(
+    Course_ID CHAR(10) PRIMARY KEY,
+    Course_Name VARCHAR(50),
     Course_Credit INT,
     DepID VARCHAR(20)
 );
 
-CREATE ELIGIBILITY (
+CREATE TABLE ELIGIBILITY (
     El_ID VARCHAR(10) PRIMARY KEY,
     El_status varchar(25),
     StuID varchar(10),  
 );
+
+CREATE TABLE STUDENT_COURSE(
+    Stu_ID VARCHAR(20),
+    COURSE_ID VARCHAR(20),
+    PRIMARY KEY(Stu_ID, Course_ID)
+);
+
