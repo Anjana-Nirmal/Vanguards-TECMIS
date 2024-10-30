@@ -6,7 +6,18 @@ CREATE TABLE LECTURER(
       FOREIGN KEY(LEC_ID) REFERENCES USER(User_Id) ON DELETE CASCADE
 );
 
-INSERT INTO LECTURER
+INSERT INTO LECTURER(LEC_ID,Position)
 VALUES
-()
+('L001','Senior Lecturer'),
+('L002','Lecturer'),
+('L003','Lecturer'),
+('L004','Senior Lecturer'),
+('L005','Professor'),
+('L006','Lecturer'),
+('L007','Lecturer'),
+('L008','Senior Lecturer'),
+('L009','Lecturer'),
+('L010','Senior Lecturer'),
+('L011','Professor'),
+('L012','Lecturer');
 
