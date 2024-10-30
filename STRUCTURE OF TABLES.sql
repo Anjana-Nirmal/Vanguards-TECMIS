@@ -1,32 +1,36 @@
 
 USER(
- User_Id  VARCHAR(20) NOT NULL,
+ User_Id  VARCHAR(20),
  NIC      CHAR(20),
  F_name  VARCHAR(50),
  L_name  VARCHAR(50),
- DOB      DATE ,
+ DOB      DATE,
  Gender   VARCHAR(10),
  Address  VARCHAR(50),
  Contact_no VARCHAR(20),
  Email VARCHAR(50),
+ Roles ENUM('STUDENT', 'LECTURER', 'DEAN', 'TO') NOT NULL,
  PRIMARY KEY(User_Id)
 );
 
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| User_Id    | varchar(20) | NO   | PRI | NULL    |       |
-| NIC        | char(20)    | YES  |     | NULL    |       |
-| F_name     | varchar(50) | YES  |     | NULL    |       |
-| L_name     | varchar(50) | YES  |     | NULL    |       |
-| DOB        | date        | YES  |     | NULL    |       |
-| Gender     | varchar(10) | YES  |     | NULL    |       |
-| Address    | varchar(50) | YES  |     | NULL    |       |
-| Contact_no | varchar(20) | YES  |     | NULL    |       |
-| Email      | varchar(50) | YES  |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
++------------+----------------------------------------+------+-----+---------+-------+
+| Field      | Type                                   | Null | Key | Default | Extra |
++------------+----------------------------------------+------+-----+---------+-------+
+| User_Id    | varchar(20)                            | NO   | PRI | NULL    |       |
+| NIC        | char(20)                               | YES  |     | NULL    |       |
+| F_name     | varchar(50)                            | YES  |     | NULL    |       |
+| L_name     | varchar(50)                            | YES  |     | NULL    |       |
+| DOB        | date                                   | YES  |     | NULL    |       |
+| Gender     | varchar(10)                            | YES  |     | NULL    |       |
+| Address    | varchar(50)                            | YES  |     | NULL    |       |
+| Contact_no | varchar(20)                            | YES  |     | NULL    |       |
+| Email      | varchar(50)                            | YES  |     | NULL    |       |
+| Roles      | enum('STUDENT','LECTURER','DEAN','TO') | NO   |     | NULL    |       |
++------------+----------------------------------------+------+-----+---------+-------+
+
 
 ----------------------------------------------------------------
+
 LECTURER(
  LEC_ID   VARCHAR(20),
  Position VARCHAR(50),
