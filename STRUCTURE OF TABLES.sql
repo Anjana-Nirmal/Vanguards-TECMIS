@@ -30,22 +30,6 @@ USER(
 
 
 ----------------------------------------------------------------
-
-LECTURER(
- LEC_ID   VARCHAR(20),
- Position VARCHAR(50),
- PRIMARY KEY(LEC_ID),
- FOREIGN KEY(LEC_ID) REFERENCES USER(User_Id) ON DELETE CASCADE 
-);
-
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| LEC_ID   | varchar(20) | NO   | PRI | NULL    |       |
-| Position | varchar(50) | YES  |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
-
-----------------------------------------------------------------
 ADMIN(
  ADMIN_ID VARCHAR(20),
  A_Role   VARCHAR(50),
@@ -112,6 +96,25 @@ TECHNICAL_OFFICER(
 +----------+-------------+------+-----+---------+-------+
 
 -------------------------------------------------------------------
+
+LECTURER(
+ LEC_ID   VARCHAR(20),
+ Position VARCHAR(50),
+ Dep_ID VARCHAR(20),
+ PRIMARY KEY(LEC_ID),
+ FOREIGN KEY(LEC_ID) REFERENCES USER(User_Id) ON DELETE CASCADE,
+ FOREIGN KEY(Dep_ID) REFERENCES DEPARTMENT(Dep_ID)
+);
+
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| LEC_ID   | varchar(20) | NO   | PRI | NULL    |       |
+| Position | varchar(50) | YES  |     | NULL    |       |
+| Dep_ID   | varchar(20) | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+
+----------------------------------------------------------------
 COURSE_UNIT(
  Course_ID  VARCHAR(20),
  C_Name    VARCHAR(50),
@@ -278,22 +281,6 @@ TO_ATTENDENCE(
 +-----------+-------------+------+-----+---------+-------+
 
 --------------------------------------------------------------------------
-LECTURER_DEPARTMENT(
-  LEC_ID VARCHAR(20),
-  Dep_ID VARCHAR(20),
-  PRIMARY KEY(LEC_ID, Dep_ID),
-  FOREIGN KEY(LEC_ID) REFERENCES LECTURER(LEC_ID),
-  FOREIGN KEY(Dep_ID) REFERENCES DEPARTMENT(Dep_ID)
-);
-
-+--------+-------------+------+-----+---------+-------+
-| Field  | Type        | Null | Key | Default | Extra |
-+--------+-------------+------+-----+---------+-------+
-| LEC_ID | varchar(20) | NO   | PRI | NULL    |       |
-| Dep_ID | varchar(20) | NO   | PRI | NULL    |       |
-+--------+-------------+------+-----+---------+-------+
-
----------------------------------------------------------------------------
 LECTURER_COURSE(
  LEC_ID VARCHAR(20),
  COURSE_ID VARCHAR(20),
