@@ -2,17 +2,18 @@
 --Medical Table
 
 INSERT INTO MEDICAL
-(MED_ID,STU_ID,Course_ID,M_Description,SubmitDate)
+(MED_ID,STU_ID,Course_ID,TO_ID,M_Description,SubmitDate)
 
 VALUES
-('MED001','TG/2022/1346','ICT1212','Anxiety or Panic Disorder','2024-08-21'),
-('MED002','TG/2022/1352','ICT1233','Migraine Attacks','2024-08-28'),
-('MED003','TG/2022/1349','ICT1242','Gastroenteritis, Stomach Flu','2024-09-10'),
-('MED004','TG/2021/1174','ICT1212','Asthma Exacerbation','2024-09-18'),
-('MED005','TG/2022/1358','ICT1253','Preventing Contagion','2024-09-30'),
-('MED006','TG/2022/1350','TCS1212','Flu or Severe Cold','2024-10-02'),
-('MED007','TG/2022/1352','ICT1212','Migraine Attacks','2024-10-12'),
-('MED008','TG/2022/1354','ICT1233','Gastroenteritis, Stomach Flu','2024-10-24');
+('MED001','TG/2022/1346','ICT1212','T005','Anxiety or Panic Disorder','2024-08-21'),
+('MED002','TG/2022/1352','ICT1233','T004','Migraine Attacks','2024-08-28'),
+('MED003','TG/2022/1349','ICT1242','T001','Gastroenteritis, Stomach Flu','2024-09-10'),
+('MED004','TG/2021/1174','ICT1212','T005','Asthma Exacerbation','2024-09-18'),
+('MED005','TG/2022/1358','ICT1253','T005','Preventing Contagion','2024-09-30'),
+('MED006','TG/2022/1350','TCS1212','T004','Flu or Severe Cold','2024-10-02'),
+('MED007','TG/2022/1352','ICT1212','T005','Migraine Attacks','2024-10-12'),
+('MED008','TG/2022/1354','ICT1233','T001','Gastroenteritis, Stomach Flu','2024-10-24');
+
 
 
 --Exam_Mark_Table
