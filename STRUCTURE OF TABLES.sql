@@ -1,5 +1,5 @@
 
-USER(
+ USER(
  User_Id  VARCHAR(20),
  NIC      CHAR(20),
  F_name  VARCHAR(50),
@@ -9,7 +9,7 @@ USER(
  Address  VARCHAR(50),
  Contact_no VARCHAR(20),
  Email VARCHAR(50),
- Roles ENUM('STUDENT', 'LECTURER', 'DEAN', 'TO') NOT NULL,
+ Role ENUM('STUDENT', 'LECTURER', 'DEAN', 'TO','ADMIN') NOT NULL,
  PRIMARY KEY(User_Id)
 );
 
