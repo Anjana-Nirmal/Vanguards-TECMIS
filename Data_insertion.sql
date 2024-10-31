@@ -1,7 +1,7 @@
 --COURSE_UNIT Table
 
 INSERT INTO COURSE_UNIT
-(Course_ID,Course_Name,Course_Credit,DepID)
+(Course_ID,C_Name,Credit,Dep_ID)
 
 VALUES
 ('ICT1212','Database Management Systems',2,'D_ICT'),
