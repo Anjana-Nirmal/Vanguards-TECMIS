@@ -229,7 +229,7 @@ VALUES
 ('L001','ICT1233','Chinthaka Chandrakumara',60),
 ('L002','ICT1212','W.Chandradasa Perera',30),
 ('L003','ICT1242','L.Manjula Vithanapathirana',30),
-('L004','ICT1222','J.M.Samudra Senarath',60),
+('L004','ICT1222','J.M.Samudra Senarath',30),
 ('L005','ENG1222','S.D.Indiaka Divakara',30),
 ('L006','ICT1233','Chinthaka Chandrakumara',60),
 ('L007','ENG1222','S.D.Indiaka Divakara',30),
