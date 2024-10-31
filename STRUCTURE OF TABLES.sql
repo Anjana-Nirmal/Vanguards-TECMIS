@@ -80,7 +80,6 @@ TECHNICAL_OFFICER(
 -------------------------------------------------------------------
 ADMIN(
  ADMIN_ID VARCHAR(20),
- A_Role   VARCHAR(50),
  Dep_ID VARCHAR(20),
  PRIMARY KEY(ADMIN_ID),
  FOREIGN KEY(ADMIN_ID) REFERENCES USER(User_Id) ON DELETE CASCADE,
@@ -91,10 +90,8 @@ ADMIN(
 | Field    | Type        | Null | Key | Default | Extra |
 +----------+-------------+------+-----+---------+-------+
 | ADMIN_ID | varchar(20) | NO   | PRI | NULL    |       |
-| A_Role   | varchar(50) | YES  |     | NULL    |       |
 | Dep_ID   | varchar(20) | YES  | MUL | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
-
 -----------------------------------------------------------------
 
 LECTURER(
