@@ -30,21 +30,6 @@
 
 
 ----------------------------------------------------------------
-ADMIN(
- ADMIN_ID VARCHAR(20),
- A_Role   VARCHAR(50),
- PRIMARY KEY(ADMIN_ID),
- FOREIGN KEY(ADMIN_ID) REFERENCES USER(User_Id) ON DELETE CASCADE
-);
-
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| ADMIN_ID | varchar(20) | NO   | PRI | NULL    |       |
-| A_Role   | varchar(50) | YES  |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
-
------------------------------------------------------------------
 
 DEAN(
  DEAN_ID VARCHAR(20),
@@ -80,22 +65,37 @@ TECHNICAL_OFFICER(
     Dep_ID VARCHAR(20),
     D_Name VARCHAR(50),
     DEAN_ID VARCHAR(20),
-    ADMIN_ID VARCHAR(20),
     PRIMARY KEY(Dep_ID),
-    FOREIGN KEY(DEAN_ID) REFERENCES DEAN(DEAN_ID),
-    FOREIGN KEY(ADMIN_ID) REFERENCES ADMIN(ADMIN_ID)
+    FOREIGN KEY(DEAN_ID) REFERENCES DEAN(DEAN_ID)
+);
+
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Dep_ID  | varchar(20) | NO   | PRI | NULL    |       |
+| D_Name  | varchar(50) | YES  |     | NULL    |       |
+| DEAN_ID | varchar(20) | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+
+-------------------------------------------------------------------
+ADMIN(
+ ADMIN_ID VARCHAR(20),
+ A_Role   VARCHAR(50),
+ Dep_ID VARCHAR(20),
+ PRIMARY KEY(ADMIN_ID),
+ FOREIGN KEY(ADMIN_ID) REFERENCES USER(User_Id) ON DELETE CASCADE,
+ FOREIGN KEY(Dep_ID) REFERENCES DEPARTMENT(Dep_ID)
 );
 
 +----------+-------------+------+-----+---------+-------+
 | Field    | Type        | Null | Key | Default | Extra |
 +----------+-------------+------+-----+---------+-------+
-| Dep_ID   | varchar(20) | NO   | PRI | NULL    |       |
-| D_Name   | varchar(50) | YES  |     | NULL    |       |
-| DEAN_ID  | varchar(20) | YES  | MUL | NULL    |       |
-| ADMIN_ID | varchar(20) | YES  | MUL | NULL    |       |
+| ADMIN_ID | varchar(20) | NO   | PRI | NULL    |       |
+| A_Role   | varchar(50) | YES  |     | NULL    |       |
+| Dep_ID   | varchar(20) | YES  | MUL | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 
--------------------------------------------------------------------
+-----------------------------------------------------------------
 
 LECTURER(
  LEC_ID   VARCHAR(20),
