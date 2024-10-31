@@ -1,3 +1,6 @@
+CREATE DATABASE vanguards;
+USE vanguards;
+
 
 -- ADMIN PRIVILEGES
 
