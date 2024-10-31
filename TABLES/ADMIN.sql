@@ -1,15 +1,15 @@
-
 -- ADMIN Table structure
 
-
-CREATE TABLE ADMIN (                            
-
+CREATE TABLE ADMIN (
     ADMIN_ID VARCHAR(20),
-    Dep_ID VARCHAR(20), 
-
+    Dep_ID VARCHAR(20),
     PRIMARY KEY(ADMIN_ID),
-
     FOREIGN KEY(ADMIN_ID) REFERENCES USER(User_Id),
     FOREIGN KEY(Dep_ID) REFERENCES DEPARTMENT(Dep_ID)
-
 );
+-------------INSERT DATA TO  ADMIN 
+
+INSERT INTO admin (ADMIN_ID, Dep_ID)
+VALUES ('A001', 'D_ICT'),
+    ('A002', 'D_ET'),
+    ('A003', 'D_MDS');
