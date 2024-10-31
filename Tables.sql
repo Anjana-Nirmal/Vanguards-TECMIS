@@ -1,7 +1,7 @@
 CREATE TABLE COURSE_UNIT(
     Course_ID VARCHAR(20) PRIMARY KEY,
-    Course_Name VARCHAR(50),
-    Course_Credit INT,
+    C_Name VARCHAR(50),
+    Credit INT,
     Dep_ID VARCHAR(20)
 );
 
