@@ -10,7 +10,7 @@ CREATE TABLE DEPARTMENT(
 
 INSERT INTO DEPARTMENT (Dep_ID, D_Name, DEAN_ID, ADMIN_ID)
 VALUES 
-('D_ICT', 'ICT Department', 'DEAN001', 'ADMIN001'),
-('D_ET', 'ET Department', 'DEAN001', 'ADMIN002'),
-('D_MDS' , 'Multideciplinary Department','DEAN001','ADMIN003');
+('D_ICT', 'ICT Department', 'DEAN001', 'A001'),
+('D_ET', 'ET Department', 'DEAN001', 'A002'),
+('D_MDS' , 'Multideciplinary Department','DEAN001','A003');
 
