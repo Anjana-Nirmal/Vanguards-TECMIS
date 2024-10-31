@@ -1,6 +1,6 @@
 -----STUDENT Table structure
 
-REATE TABLE STUDENT(                       
+CREATE TABLE STUDENT(                       
     Stu_ID VARCHAR(20),
     S_Status ENUM('proper', 'repeat', 'suspended'),
     --GPA DECIMAL(4, 2),
