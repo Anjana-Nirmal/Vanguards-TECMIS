@@ -17,7 +17,7 @@ VALUES
 --ELIGIBILITY Table
 
 INSERT INTO ELIGIBILITY 
-(El_ID, E_Status)
+(El_ID, El_status)
 
 VALUES
 ('EE','Eligible'),
