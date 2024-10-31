@@ -1,4 +1,6 @@
-CREATE TABLE USER(                           --USER Table structure
+  ----USER Table structure
+
+CREATE TABLE USER(                         
     User_Id     VARCHAR(20),
     NIC CHAR(20) UNIQUE,
     F_name VARCHAR(50),
