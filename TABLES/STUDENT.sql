@@ -10,7 +10,7 @@ CREATE TABLE STUDENT(                       --STUDENT Table structure
     FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID)
 );
 
--------------INSERT DATA TO 
+-------------INSERT DATA TO  STUDENT 
 
 INSERT INTO STUDENT (Stu_ID, S_Status) VALUES
 ('TG/2019/1018', 'Repeat'),
