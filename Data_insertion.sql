@@ -4,14 +4,14 @@ INSERT INTO COURSE_UNIT
 (Course_ID,C_Name,Credit,Dep_ID)
 
 VALUES
-('ICT1212','Database Management Systems',2,'D_ICT'),
-('ICT1222','Database Management Systems Practicum',2,'D_ICT'),
-('ICT1233','Server-Side Web Development',3,'D_ICT'),
-('ICT1242','Computer Architecture',2,'D_ICT'),
-('ICT1253','Computer Networks',3,'D_ICT'),
-('TCS1212','Fundamentals of Management',2,'D_MDS'),
-('TMS1233','Discrete Mathematics',3,'D_ET'),
-('ENG1222','English II',2,'D_MDS');
+('ICT1212','Database Management Systems',2,'Theory','D_ICT'),
+('ICT1222','Database Management Systems Practicum',2,'Practical','D_ICT'),
+('ICT1233','Server-Side Web Development',3,'Theory/Practical','D_ICT'),
+('ICT1242','Computer Architecture',2,'Theory','D_ICT'),
+('ICT1253','Computer Networks',3,'Theory/Practical','D_ICT'),
+('TCS1212','Fundamentals of Management',2,'Theory','D_MDS'),
+('TMS1233','Discrete Mathematics',3,'Theory','D_ET'),
+('ENG1222','English II',2,'Theory','D_MDS');
 
 
 --ELIGIBILITY Table
