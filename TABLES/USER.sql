@@ -1,5 +1,5 @@
 CREATE TABLE USER(                           --USER Table structure
-    User_Id CHAR(20),
+    User_Id     VARCHAR(20),
     NIC CHAR(20) UNIQUE,
     F_name VARCHAR(50),
     L_name VARCHAR(50),
@@ -14,7 +14,9 @@ CREATE TABLE USER(                           --USER Table structure
 
 
 
---INSERT INTO USER (User_Id,NIC,F_name,L_name,DOB,Gender,Address,Contact_no,Email,Role)
+
+
+-------------INSERT DATA TO USER
 
 
 INSERT INTO USER (User_Id, NIC, F_name, L_name, DOB, Gender, Address, Contact_no, Email, Role) VALUES
@@ -30,15 +32,15 @@ INSERT INTO USER (User_Id, NIC, F_name, L_name, DOB, Gender, Address, Contact_no
 ('TG/2022/1302', '200245563418', 'U.G.Kasun', 'Udagedara', '2002-04-02', 'M', '103, Post Office Road, Trincomalee', '0710234578', 'ug.kasun.udagedara2024@gmail.com', 'STUDENT'),
 ('TG/2022/1348', '200256674529', 'H.M.Tharushika', 'Wimanshi', '2002-03-25', 'F', '84, Badulla Road, Nuwara Eliya', '0721345689', 'hm.tharushika.wimanshi@gmail.com', 'STUDENT'),
 ('TG/2022/1349', '200167785630', 'L.M.Tharindu', 'Perera', '2001-10-05', 'M', '188/1 A, Peter D. Perera Mawatha, Kohuwala', '0732456790', 'lm.tharindu.perera@gmail.com', 'STUDENT'),
-('TG/2022/1350', '200178896741', 'K.G.Harshani', 'Madhuwanthi', '2001-09-10', 'F', 'No. 5, Sri Dalada Vidiya, Kandy', '0743567812', 'kg.harshani.madhuwanthi@gmail.com', 'STUDENT'),
+('TG/2022/1350', '200178896742', 'K.G.Harshani', 'Madhuwanthi', '2001-09-10', 'F', 'No. 5, Sri Dalada Vidiya, Kandy', '0743567812', 'kg.harshani.madhuwanthi@gmail.com', 'STUDENT'),
 ('TG/2022/1351', '200289907852', 'N.G.Nayanavi', 'Ranasinghe', '2002-11-22', 'F', '34/2 Waldan Place, Welimada Road, Bandarawela', '0754678923', 'ng.nayanavi.ranasinghe@gmail.com', 'STUDENT'),
 ('TG/2022/1352', '200290018963', 'S.G.Supun', 'Dilhara', '2002-05-27', 'M', '64, Maliyadeva Mawatha, Kurunegala', '0765789034', 'sg.supun.dilhara@gmail.com', 'STUDENT'),
 ('TG/2022/1353', '200201129074', 'A.K.Lahiru', 'Rukmal', '2002-04-22', 'M', 'No.5, Library Road, Badulla', '0776890145', 'ak.lahiru.rukmal@gmail.com', 'STUDENT'),
 ('TG/2022/1354', '200212230185', 'T.Ravindu', 'Ransara', '2002-02-18', 'M', 'No.44 Gemunu Mawatha, Ratnapura', '0787901256', 'tr.ravindu.ransara@gmail.com', 'STUDENT'),
 ('TG/2022/1355', '200223341296', 'J.L.Thilina', 'Thathsara', '2002-06-19', 'M', 'No. 30, Janadhipathi Mawatha, Kaluthara', '0798012367', 'jl.thilina.thathsara@gmail.com', 'STUDENT'),
-('TG/2022/1356', '200234452307', 'T.Nimasha', 'Madhurangi', '2002-01-28', 'F', 'No.54, Sampath Niwasa, Ahangama', '0719123478', 'tn.nimasha.madhurangi@gmail.com', 'STUDENT'),
-('TG/2022/1357', '200245563418', 'A.G.I.Shehan', 'Dulmina', '2002-05-14', 'M', '23, Samagi Mawatha Akurugoda, Thissamaharamaya', '0720234589', 'agi.shehan.dulmina@gmail.com', 'STUDENT'),
-('TG/2022/1358', '200256674529', 'K.Ishara', 'Rathnayake', '2002-12-21', 'M', '34/2 Thelijjawila, Mathara', '0731345690', 'k.ishara.rathnayake@gmail.com', 'STUDENT'),
+('TG/2022/1356', '200234452308', 'T.Nimasha', 'Madhurangi', '2002-01-28', 'F', 'No.54, Sampath Niwasa, Ahangama', '0719123478', 'tn.nimasha.madhurangi@gmail.com', 'STUDENT'),
+('TG/2022/1357', '200245563419', 'A.G.I.Shehan', 'Dulmina', '2002-05-14', 'M', '23, Samagi Mawatha Akurugoda, Thissamaharamaya', '0720234589', 'agi.shehan.dulmina@gmail.com', 'STUDENT'),
+('TG/2022/1358', '200256674528', 'K.Ishara', 'Rathnayake', '2002-12-21', 'M', '34/2 Thelijjawila, Mathara', '0731345690', 'k.ishara.rathnayake@gmail.com', 'STUDENT'),
 ('TG/2022/1359', '200267785630', 'W.M.Pavithra', 'Virajani', '2002-06-15', 'F', '201 /1 Malalasekara Square, Colombo 7', '0742456701', 'wm.pavithra.virajani@gmail.com', 'STUDENT'),
 ('L001', '198978896741', 'Chinthaka', 'Chandrakumara', '1989-07-12', 'M', '1013, Himbutuwa, Barawardhanaoya, Hasalaka', '0753567812', 'Chinthaka.Chandrakumara@gmail.com', 'LECTURER'),
 ('L002', '199089907852', 'W.Chandradasa', 'Perera', '1990-03-05', 'M', '34/2 Salasumgama, Dehiaththakandiya', '0764678923', 'W.Chandradasa.Perera@gmail.com', 'LECTURER'),
