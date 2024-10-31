@@ -210,20 +210,23 @@ EXAM_MARK(
 ----------------------------------------------------------------------
 MEDICAL(
  MED_ID  VARCHAR(20),
+ STU_ID  VARCHAR(20),
+ Course_ID VARCHAR(20),
  M_Description  VARCHAR(50),
  SubmitDate  DATE,
- STU_ID  VARCHAR(20),
  PRIMARY KEY(Med_ID),
- FOREIGN KEY(STU_ID) REFERENCES STUDENT(Stu_ID)
+ FOREIGN KEY(STU_ID) REFERENCES STUDENT(Stu_ID),
+ FOREIGN KEY(Course_ID) REFERENCES COURSE_UNIT(Course_ID)
 );
 
 +---------------+-------------+------+-----+---------+-------+
 | Field         | Type        | Null | Key | Default | Extra |
 +---------------+-------------+------+-----+---------+-------+
 | MED_ID        | varchar(20) | NO   | PRI | NULL    |       |
+| STU_ID        | varchar(20) | YES  | MUL | NULL    |       |
+| Course_ID     | varchar(20) | YES  | MUL | NULL    |       |
 | M_Description | varchar(50) | YES  |     | NULL    |       |
 | SubmitDate    | date        | YES  |     | NULL    |       |
-| STU_ID        | varchar(20) | YES  | MUL | NULL    |       |
 +---------------+-------------+------+-----+---------+-------+
 
 -----------------------------------------------------------------------
@@ -235,13 +238,12 @@ ATTENDENCE(
  A_DATE     DATE,
  A_Type   VARCHAR(20),
  DEAN_ID VARCHAR(20),
- MED_ID VARCHAR(20),
  PRIMARY KEY(Course_ID, Stu_ID),
  FOREIGN KEY(Course_ID) REFERENCES COURSE_UNIT(Course_ID),
  FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_Id),
  FOREIGN KEY(DEAN_ID) REFERENCES DEAN(DEAN_Id),
- FOREIGN KEY(MED_ID) REFERENCES MEDICAL(MED_Id)
 );
+
 
 +-----------+-------------+------+-----+---------+-------+
 | Field     | Type        | Null | Key | Default | Extra |
@@ -252,7 +254,6 @@ ATTENDENCE(
 | A_DATE    | date        | YES  |     | NULL    |       |
 | A_Type    | varchar(20) | YES  |     | NULL    |       |
 | DEAN_ID   | varchar(20) | YES  | MUL | NULL    |       |
-| MED_ID    | varchar(20) | YES  | MUL | NULL    |       |
 +-----------+-------------+------+-----+---------+-------+
 
 ------------------------------------------------------------------------
