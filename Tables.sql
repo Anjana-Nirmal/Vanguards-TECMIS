@@ -8,7 +8,7 @@ CREATE TABLE COURSE_UNIT(
 CREATE TABLE ELIGIBILITY (
     El_ID VARCHAR(10) PRIMARY KEY,
     El_status varchar(25),
-    StuID varchar(10),  
+    StuID varchar(10)
 );
 
 CREATE TABLE STUDENT_COURSE(
