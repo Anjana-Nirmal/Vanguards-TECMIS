@@ -8,7 +8,7 @@ CREATE TABLE USER(                           --USER Table structure
     `Address` VARCHAR(50),
     Contact_no VARCHAR(20),
     Email VARCHAR(50),
-    `Role` ENUM('STUDENT', 'LECTURER', 'DEAN', 'TO') NOT NULL,
+    `Role` ENUM('STUDENT', 'LECTURER', 'DEAN', 'TO','ADMIN') NOT NULL,
     PRIMARY KEY(User_Id)
 );
 
@@ -63,3 +63,6 @@ INSERT INTO USER (User_Id, NIC, F_name, L_name, DOB, Gender, Address, Contact_no
 ('T007', '197756674529', 'A.Harshani', 'Karunathilaka', '1977-05-03', 'F', 'No.872, Weeraketiya, Hambanthota', '0751345690', 'A.Harshani.Karunathilaka@gmail.com', 'TO'),
 ('T008', '199367785630', 'D.M.Amila', 'Sandeepa', '1993-02-11', 'M', '76/5 Main Road, Polonnaruwa', '0762456701', 'D.M.Amila.Sandeepa@gmail.com', 'TO'),
 ('D001', '198278896741', 'A.K.Roshan', 'Gamage', '1982-07-16', 'M', '78, Mango Tree Lane, Rathgama, Galle', '0726842654', 'Roshan716gamage@gmail.com', 'DEAN');
+('A001', '197867319584', 'R.T.Ruwan', 'Kumara', '1978-05-06', 'M', '71/1 Udugampolapaara, Gampaha', '0764876531', 'ruwan.kumara1978@gmail.com', 'ADMIN'),
+('A002', '198883491675', 'J.K. Sanjeewa', 'Dissanayake', '1988-06-07', 'M', '56/7 Kaburupiya, Mathara', '0711342101', 'sanjeewa88jk@gmail.com', 'ADMIN'),
+('A003', '198578345155', 'L.A.Nilupul', 'Chamara', '1985-09-27', 'M', '471, Galle Main Road, Kollupitiya', '0712222564', 'chamaranilupul1985@gmail.com', 'ADMIN');

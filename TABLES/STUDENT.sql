@@ -10,3 +10,6 @@ CREATE TABLE STUDENT(                       --STUDENT Table structure
     FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID)
 );
 
+
+
+INSERT INTO STUDENT(Stu_ID,S_Status,GPA)
