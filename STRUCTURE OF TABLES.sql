@@ -230,18 +230,16 @@ MEDICAL(
 +---------------+-------------+------+-----+---------+-------+
 
 -----------------------------------------------------------------------
-
-ATTENDENCE(
- Course_ID  VARCHAR(20),
- Stu_ID  VARCHAR(20),
- A_Status VARCHAR(20),
- A_DATE     DATE,
- A_Type   VARCHAR(20),
- DEAN_ID VARCHAR(20),
- PRIMARY KEY(Course_ID, Stu_ID),
- FOREIGN KEY(Course_ID) REFERENCES COURSE_UNIT(Course_ID),
- FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_Id),
- FOREIGN KEY(DEAN_ID) REFERENCES DEAN(DEAN_Id),
+ATTENDENCE (
+   Course_ID  VARCHAR(20),
+   Stu_ID     VARCHAR(20),
+   A_Status   VARCHAR(20),
+   A_DATE     DATE,
+   A_Type     VARCHAR(20),
+   DEAN_ID    VARCHAR(20),
+   PRIMARY KEY (Course_ID, Stu_ID, A_DATE, A_Type),
+   FOREIGN KEY (Course_ID) REFERENCES COURSE_UNIT(Course_ID),
+   FOREIGN KEY (Stu_ID) REFERENCES STUDENT(Stu_ID)
 );
 
 
@@ -251,9 +249,9 @@ ATTENDENCE(
 | Course_ID | varchar(20) | NO   | PRI | NULL    |       |
 | Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
 | A_Status  | varchar(20) | YES  |     | NULL    |       |
-| A_DATE    | date        | YES  |     | NULL    |       |
-| A_Type    | varchar(20) | YES  |     | NULL    |       |
-| DEAN_ID   | varchar(20) | YES  | MUL | NULL    |       |
+| A_DATE    | date        | NO   | PRI | NULL    |       |
+| A_Type    | varchar(20) | NO   | PRI | NULL    |       |
+| DEAN_ID   | varchar(20) | YES  |     | NULL    |       |
 +-----------+-------------+------+-----+---------+-------+
 
 ------------------------------------------------------------------------
