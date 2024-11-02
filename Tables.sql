@@ -24,7 +24,6 @@ CREATE TABLE EXAM_MARK(
 	mid_Practical DECIMAL(5,2),
 	end_Theory DECIMAL(5,2),
 	end_Practical DECIMAL(5,2),
-	ELI_ID VARCHAR(20), 
 	PRIMARY KEY(Stu_ID, Course_ID)
 );
 
@@ -36,7 +35,7 @@ CREATE TABLE MEDICAL(
  	M_Description VARCHAR(50),
 	SubmitDate  DATE,
  	PRIMARY KEY(Med_ID)
-);
+);	
 
 
 CREATE TABLE TO_ATTENDENCE(
