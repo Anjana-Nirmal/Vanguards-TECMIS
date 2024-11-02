@@ -2,22 +2,22 @@
 --Medical Table
 
 INSERT INTO MEDICAL
-(MED_ID,STU_ID,Course_ID,TO_ID,M_Description,SubmitDate)
+(MED_ID,STU_ID,Course_ID,M_Description,SubmitDate)
 
 VALUES
-('MED001','TG/2022/1352','ICT1212','T005','Anxiety or Panic Disorder','2024-08-06'),
-('MED002','TG/2022/1357','TMS1233','T004','Migraine Attacks','2024-08-14'),
-('MED003','TG/2022/1354','ICT1242','T001','Gastroenteritis, Stomach Flu','2024-08-15'),
-('MED004','TG/2022/1349','TCS1212','T005','Asthma Exacerbation','2024-08-23'),
-('MED005','TG/2022/1352','ICT1212','T005','Preventing Contagion','2024-08-27'),
-('MED006','TG/2022/1354','ICT1242','T004','Flu or Severe Cold','2024-09-05'),
-('MED007','TG/2022/1357','TMS1233','T005','Migraine Attacks','2024-09-18'),
-('MED008','TG/2022/1351','ICT1233','T001','Gastroenteritis, Stomach Flu','2024-10-07'),
-('MED009','TG/2022/1354','ICT1242','T004','Flu','2024-10-10'),
-('MED010','TG/2022/1349','TCS1212','T001','Stomach Flu','2024-10-25'),
-('MED011','TG/2022/1355','ICT1253','T004','Severe Cold','2024-10-31'),
-('MED012','TG/2022/1357','TMS1233','T005','Asthma Exacerbation','2024-11-06'),
-('MED013','TG/2022/1355','ICT1253','T004','Flu','2024-11-14');
+('MED001','TG/2022/1352','ICT1212','Anxiety or Panic Disorder','2024-08-06'),
+('MED002','TG/2022/1357','TMS1233','Migraine Attacks','2024-08-14'),
+('MED003','TG/2022/1354','ICT1242','Gastroenteritis, Stomach Flu','2024-08-15'),
+('MED004','TG/2022/1349','TCS1212','Asthma Exacerbation','2024-08-23'),
+('MED005','TG/2022/1352','ICT1212','Preventing Contagion','2024-08-27'),
+('MED006','TG/2022/1354','ICT1242','Flu or Severe Cold','2024-09-05'),
+('MED007','TG/2022/1357','TMS1233','Migraine Attacks','2024-09-18'),
+('MED008','TG/2022/1351','ICT1233','Gastroenteritis, Stomach Flu','2024-10-07'),
+('MED009','TG/2022/1354','ICT1242','Flu','2024-10-10'),
+('MED010','TG/2022/1349','TCS1212','Stomach Flu','2024-10-25'),
+('MED011','TG/2022/1355','ICT1253','Severe Cold','2024-10-31'),
+('MED012','TG/2022/1357','TMS1233','Asthma Exacerbation','2024-11-06'),
+('MED013','TG/2022/1355','ICT1253','Flu','2024-11-14');
 
 
 
@@ -208,11 +208,11 @@ VALUES
 INSERT INTO TECHNICAL_OFFICER
 (TO_ID, T_Role)
 VALUES
-('T001','Systems Administrator'),
+('Systems Administrator'),
 ('T002','Network Engineer'),
 ('T003','Technical Support Specialist'),
-('T004','Systems Administrator'),
-('T005','Database Administrator'),
+('Systems Administrator'),
+('Database Administrator'),
 ('T006','Security Officer'),
 ('T007','Technical Support Specialist'),
 ('T008','Security Officer');
