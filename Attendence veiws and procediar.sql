@@ -218,3 +218,61 @@ ORDER BY
 SELECT * FROM AttendanceBatchSummary WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
 
 CALL attendance_check_courseID('ICT1212');
+CALL CA_Summary('ICT1242');
+
+
+DELIMITER //
+CREATE PROCEDURE combined_eligibility_check(
+    IN input_Course_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        a.Stu_ID,
+        a.Course_ID,
+
+        -- Attendance Percentage Calculation
+        (SUM(CASE WHEN a.A_Status = 'Present' OR EXISTS (
+            SELECT 1 FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+        ) THEN 1 ELSE 0 END) / 30 * 100) AS Attendance_Percentage,
+
+        -- Attendance Eligibility based on >= 80%
+        IF((SUM(CASE WHEN a.A_Status = 'Present' OR EXISTS (
+            SELECT 1 FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+        ) THEN 1 ELSE 0 END) / 30 * 100) >= 80, 'Eligible', 'Not Eligible') AS Attendance_Eligibility,
+
+        -- Total CA Marks Calculation
+        em.Quiz_1 + em.Quiz_2 + em.Quiz_3 + em.Assesment + em.mid_Theory + em.mid_Practical AS Total_CA_Marks,
+
+        -- CA Eligibility based on >= 50 marks
+        IF(em.Quiz_1 + em.Quiz_2 + em.Quiz_3 + em.Assesment + em.mid_Theory + em.mid_Practical >= 50, 
+            'Eligible', 
+            'Not Eligible') AS CA_Eligibility,
+
+        -- Final Combined Eligibility (Eligible only if both attendance and CA are eligible)
+        IF(
+            (SUM(CASE WHEN a.A_Status = 'Present' OR EXISTS (
+                SELECT 1 FROM MEDICAL m 
+                WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+            ) THEN 1 ELSE 0 END) / 30 * 100) >= 80 
+            AND 
+            (em.Quiz_1 + em.Quiz_2 + em.Quiz_3 + em.Assesment + em.mid_Theory + em.mid_Practical >= 50), 
+            'Eligible', 
+            'Not Eligible'
+        ) AS Combined_Eligibility
+
+    FROM 
+        ATTENDENCE a
+    LEFT JOIN 
+        EXAM_MARK em ON em.Stu_ID = a.Stu_ID AND em.Course_ID = a.Course_ID
+    WHERE 
+        a.Course_ID = input_Course_ID
+    GROUP BY 
+        a.Course_ID, a.Stu_ID
+    HAVING 
+        Combined_Eligibility = 'Eligible'  
+    ORDER BY 
+        a.Stu_ID;
+END //
+DELIMITER ;
