@@ -156,3 +156,65 @@ DELIMITER ;
 CALL attendance_check_courseID('ICT1212');
 
 DROP PROCEDURE IF EXISTS attendance_check_courseID;
+
+-------------------------------------------------------------------
+CREATE VIEW AttendanceBatchSummary AS
+SELECT 
+    a.Course_ID,
+    a.Stu_ID,
+    COUNT(CASE WHEN a.A_Type = 'T' AND (a.A_Status = 'Present' OR EXISTS (
+        SELECT 1 
+        FROM MEDICAL m 
+        WHERE m.Stu_ID = a.Stu_ID 
+          AND m.Course_ID = a.Course_ID 
+          AND m.SubmitDate = a.A_DATE)) 
+        THEN 1 
+    END) / 15 * 100 AS Theory_Percentage,
+    
+    IF(COUNT(CASE WHEN a.A_Type = 'T' AND (a.A_Status = 'Present' OR EXISTS (
+        SELECT 1 
+        FROM MEDICAL m 
+        WHERE m.Stu_ID = a.Stu_ID 
+          AND m.Course_ID = a.Course_ID 
+          AND m.SubmitDate = a.A_DATE)) 
+        THEN 1 
+    END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible') AS Theory_Eligibility,
+
+    CASE 
+        WHEN a.Course_ID IN ('ICT1233', 'ICT1253') THEN COUNT(CASE WHEN a.A_Type = 'P' AND (a.A_Status = 'Present' OR EXISTS (
+            SELECT 1 
+            FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID 
+              AND m.Course_ID = a.Course_ID 
+              AND m.SubmitDate = a.A_DATE)) 
+            THEN 1 
+        END) / 15 * 100 
+        ELSE NULL
+    END AS Practical_Percentage,
+
+    CASE 
+        WHEN a.Course_ID IN ('ICT1233', 'ICT1253') THEN IF(COUNT(CASE WHEN a.A_Type = 'P' AND (a.A_Status = 'Present' OR EXISTS (
+            SELECT 1 
+            FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID 
+              AND m.Course_ID = a.Course_ID 
+              AND m.SubmitDate = a.A_DATE)) 
+            THEN 1 
+        END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible')
+        ELSE NULL
+    END AS Practical_Eligibility
+
+FROM 
+    ATTENDENCE a
+GROUP BY 
+    a.Course_ID, a.Stu_ID
+ORDER BY 
+    a.Course_ID, a.Stu_ID;
+
+
+-------------------------------------------    SHOW RESULTS--------------------------------------------------
+
+
+SELECT * FROM AttendanceBatchSummary WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
+
+CALL attendance_check_courseID('ICT1212');
