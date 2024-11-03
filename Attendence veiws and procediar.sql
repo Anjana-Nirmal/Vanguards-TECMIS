@@ -100,7 +100,7 @@ GROUP BY
 
 
 	
----------------------------------ATTENDENCE _Summary hoal batch------------------------------------------
+---------------------------------ATTENDENCE _Summary whole batch------------------------------------------
 
 
 
@@ -162,6 +162,11 @@ SELECT * FROM attendance_eligibility_summary;
 DROP view attendance_eligibility_summary;
 
 
+SELECT * FROM attendance_eligibility_summary WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
+
+
+
+
 
 -------------------SLECT  Not eligible (without medical ) --------------------------------
 CREATE VIEW Not_Eligible_Students AS
@@ -196,7 +201,8 @@ WHERE Medical_With_Eligibility = 'Not Eligible';
 
 -----------------selct eligible (with medicle)------------------------
 SELECT * FROM attendance_eligibility_with_medical
-    -> WHERE Medical_With_Eligibility='Eligible';
+     WHERE Medical_With_Eligibility='Eligible';
+
 
 
 ------------------------ check eligibility  as individuals ----------------------------------
@@ -220,63 +226,10 @@ WHERE
        Stu_ID='TG/2022/1350' AND Course_ID='ICT1212';
 
 
-  --------------------------------------------------------------------------------------------
 
-CREATE VIEW AttendanceBatchSummary AS
-SELECT 
-    a.Course_ID,
-    a.Stu_ID,
-    COUNT(CASE WHEN a.A_Type = 'T' AND (a.A_Status = 'Present' OR EXISTS (
-        SELECT 1 
-        FROM MEDICAL m 
-        WHERE m.Stu_ID = a.Stu_ID 
-          AND m.Course_ID = a.Course_ID 
-          AND m.SubmitDate = a.A_DATE)) 
-        THEN 1 
-    END) / 15 * 100 AS Theory_Percentage,
-    
-    IF(COUNT(CASE WHEN a.A_Type = 'T' AND (a.A_Status = 'Present' OR EXISTS (
-        SELECT 1 
-        FROM MEDICAL m 
-        WHERE m.Stu_ID = a.Stu_ID 
-          AND m.Course_ID = a.Course_ID 
-          AND m.SubmitDate = a.A_DATE)) 
-        THEN 1 
-    END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible') AS Theory_Eligibility,
+SELECT * FROM attendance_eligibility_summary 
+ WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
 
-    CASE 
-        WHEN a.Course_ID IN ('ICT1233', 'ICT1253') THEN COUNT(CASE WHEN a.A_Type = 'P' AND (a.A_Status = 'Present' OR EXISTS (
-            SELECT 1 
-            FROM MEDICAL m 
-            WHERE m.Stu_ID = a.Stu_ID 
-              AND m.Course_ID = a.Course_ID 
-              AND m.SubmitDate = a.A_DATE)) 
-            THEN 1 
-        END) / 15 * 100 
-        ELSE NULL
-    END AS Practical_Percentage,
-
-    CASE 
-        WHEN a.Course_ID IN ('ICT1233', 'ICT1253') THEN IF(COUNT(CASE WHEN a.A_Type = 'P' AND (a.A_Status = 'Present' OR EXISTS (
-            SELECT 1 
-            FROM MEDICAL m 
-            WHERE m.Stu_ID = a.Stu_ID 
-              AND m.Course_ID = a.Course_ID 
-              AND m.SubmitDate = a.A_DATE)) 
-            THEN 1 
-        END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible')
-        ELSE NULL
-    END AS Practical_Eligibility
-
-FROM 
-    ATTENDENCE a
-GROUP BY 
-    a.Course_ID, a.Stu_ID
-ORDER BY 
-    a.Course_ID, a.Stu_ID;
-
-
-SELECT * FROM AttendanceBatchSummary WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
 
 
 --------------------------- check eligibility for the whole batch-------------------------------
@@ -292,91 +245,71 @@ WHERE
 ----------------------------------------procedure-------------------------------
 
 DELIMITER //
-CREATE PROCEDURE attendance_check_courseID(IN input_Course_ID VARCHAR(20))
+
+CREATE PROCEDURE GetAttendanceByCourse(IN input_Course_ID VARCHAR(20))
+BEGIN
+    SELECT 
+        ae.Stu_ID,
+        a.A_DATE,
+        ae.Attendance_Percentage AS Percentage,
+        ae.Medical_with_Eligibility AS Eligibility
+    FROM 
+        attendance_eligibility_summary ae
+        JOIN ATTENDENCE a ON ae.Stu_ID = a.Stu_ID AND ae.Course_ID = a.Course_ID
+    WHERE 
+        ae.Course_ID = input_Course_ID
+    ORDER BY 
+        ae.Stu_ID, a.A_DATE;
+END //
+
+DELIMITER ;
+
+CALL GetAttendanceByCourse('ICT1253');
+
+DROP PROCEDURE GetAttendanceByCourse;
+
+--------------------------------------------------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE GetOverallAttendanceByStudent(IN input_Stu_ID VARCHAR(20))
 BEGIN
     SELECT 
         ae.Course_ID,
-        a.Stu_ID,
-        ae.Percentage AS Total_Percentage,
-        ae.Eligibility AS Total_Eligibility,
-        COUNT(CASE WHEN a.A_Type = 'T' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 AS Theory_Percentage,
-        IF(COUNT(CASE WHEN a.A_Type = 'T' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible') AS Theory_Eligibility,
-        COUNT(CASE WHEN a.A_Type = 'P' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 AS Practical_Percentage,
-        IF(COUNT(CASE WHEN a.A_Type = 'P' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible') AS Practical_Eligibility
+        ae.Stu_ID,
+        ae.Attendance_Percentage AS Percentage,
+        ae.Medical_with_Eligibility AS Eligibility
     FROM 
-        ATTENDENCE a
-        JOIN attendance_eligibility ae ON ae.Stu_ID = a.Stu_ID
+        attendance_eligibility_summary ae
     WHERE 
-        ae.Course_ID = input_Course_ID AND
-        (a.A_Status = 'Present' OR EXISTS (
-            SELECT 1 FROM MEDICAL m 
-            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
-        ))
-    GROUP BY 
-        ae.Course_ID, a.Stu_ID
+        ae.Stu_ID = input_Stu_ID
     ORDER BY 
-        a.Stu_ID;  
+        ae.Course_ID;
 END //
+
 DELIMITER ;
 
+CALL GetOverallAttendanceByStudent('TG/2022/1348');
 
-CALL attendance_check_courseID('ICT1212');
-
-
-----------------------------------------------------------------------------------------------
-
+---------------------------------------------------------------------------------
 DELIMITER //
-CREATE PROCEDURE combined_eligibility_check(
-    IN input_Course_ID VARCHAR(20)
-)
+
+CREATE PROCEDURE GetAttendanceByStudentAndCourse(IN input_Stu_ID VARCHAR(20), IN input_Course_ID VARCHAR(20))
 BEGIN
     SELECT 
-        a.Stu_ID,
-        a.Course_ID,
-
-        -- Attendance Percentage Calculation
-        (SUM(CASE WHEN a.A_Status = 'Present' OR EXISTS (
-            SELECT 1 FROM MEDICAL m 
-            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
-        ) THEN 1 ELSE 0 END) / 30 * 100) AS Attendance_Percentage,
-
-        -- Attendance Eligibility based on >= 80%
-        IF((SUM(CASE WHEN a.A_Status = 'Present' OR EXISTS (
-            SELECT 1 FROM MEDICAL m 
-            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
-        ) THEN 1 ELSE 0 END) / 30 * 100) >= 80, 'Eligible', 'Not Eligible') AS Attendance_Eligibility,
-
-        -- Total CA Marks Calculation
-        em.Quiz_1 + em.Quiz_2 + em.Quiz_3 + em.Assesment + em.mid_Theory + em.mid_Practical AS Total_CA_Marks,
-
-        -- CA Eligibility based on >= 50 marks
-        IF(em.Quiz_1 + em.Quiz_2 + em.Quiz_3 + em.Assesment + em.mid_Theory + em.mid_Practical >= 50, 
-            'Eligible', 
-            'Not Eligible') AS CA_Eligibility,
-
-        -- Final Combined Eligibility (Eligible only if both attendance and CA are eligible)
-        IF(
-            (SUM(CASE WHEN a.A_Status = 'Present' OR EXISTS (
-                SELECT 1 FROM MEDICAL m 
-                WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
-            ) THEN 1 ELSE 0 END) / 30 * 100) >= 80 
-            AND 
-            (em.Quiz_1 + em.Quiz_2 + em.Quiz_3 + em.Assesment + em.mid_Theory + em.mid_Practical >= 50), 
-            'Eligible', 
-            'Not Eligible'
-        ) AS Combined_Eligibility
-
+        ae.Stu_ID,
+        ae.Course_ID,
+        ae.Attendance_Percentage AS Percentage,
+        ae.Medical_with_Eligibility AS Eligibility
     FROM 
-        ATTENDENCE a
-    LEFT JOIN 
-        EXAM_MARK em ON em.Stu_ID = a.Stu_ID AND em.Course_ID = a.Course_ID
+        attendance_eligibility_summary ae
     WHERE 
-        a.Course_ID = input_Course_ID
-    GROUP BY 
-        a.Course_ID, a.Stu_ID
-    HAVING 
-        Combined_Eligibility = 'Eligible'  
+        ae.Stu_ID = input_Stu_ID
+        AND ae.Course_ID = input_Course_ID
     ORDER BY 
-        a.Stu_ID;
+        ae.Stu_ID, ae.Course_ID;
 END //
+
 DELIMITER ;
+
+CALL GetAttendanceByStudentAndCourse('TG/2022/1348', 'ICT1212');
