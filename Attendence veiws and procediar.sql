@@ -27,20 +27,20 @@ FROM
 
 
 
-CREATE VIEW CA_Result_With_Attendance AS 
-SELECT 
-    c.course_code,
-    c.student_id,
-    a.Eligibility AS 
-        Attendace_Eligibility,
-        c.Eligibility AS CA_Eligibility,
+-- CREATE VIEW CA_Result_With_Attendance AS 
+-- SELECT 
+--     c.course_code,
+--     c.student_id,
+--     a.Eligibility AS 
+--         Attendace_Eligibility,
+--         c.Eligibility AS CA_Eligibility,
 
-    IF(a.Eligibility='Eligible' AND c.Eligibility='Eligible','Eligible','Not Eligible') AS Eligibility
-FROM AttendanceEligibilitySummary a,
-  CA_Result_Without_Attendance c
-WHERE 
-   a.student_id=c.student_id AND c.course_code=a.course_code
-GROUP BY c.student_id,course_code;
+--     IF(a.Eligibility='Eligible' AND c.Eligibility='Eligible','Eligible','Not Eligible') AS Eligibility
+-- FROM AttendanceEligibilitySummary a,
+--   CA_Result_Without_Attendance c
+-- WHERE 
+--    a.student_id=c.student_id AND c.course_code=a.course_code
+-- GROUP BY c.student_id,course_code;
 
 ---------------------------------------------------------
 
@@ -125,23 +125,34 @@ WHERE
 ---------------------------------------  procedure-------------------------------
 
 DELIMITER //
-
-CREATE PROCEDURE attendance_check_courseID(IN  Course_ID VARCHAR(20))
+CREATE PROCEDURE attendance_check_courseID(IN input_Course_ID VARCHAR(20))
 BEGIN
-	SELECT 
-		attendance_eligibility_view.stu_id,
-		attendance.date,
-		attendance_eligibility_view.Percentage,
-		attendance_eligibility_view.Eligibility
-	from 
-		attendance,
-		attendance_eligibility_view
-	where 
-		attendance_eligibility_view.stu_id=attendance.stu_id 
-		AND attendance_eligibility_view.Course_code=Course_code 
-		AND attendance_eligibility_view.Type!='E_T' AND attendance_eligibility_view.Type!='E_TP' AND attendance_eligibility_view.Type!='E_P'; 
-	END //
-	DELIMITER ;
-	
-	CALL get_attendance_by_course_code('ICT1212');
+    SELECT 
+        ae.Course_ID,
+        a.Stu_ID,
+        ae.Percentage AS Total_Percentage,
+        ae.Eligibility AS Total_Eligibility,
+        COUNT(CASE WHEN a.A_Type = 'T' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 AS Theory_Percentage,
+        IF(COUNT(CASE WHEN a.A_Type = 'T' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible') AS Theory_Eligibility,
+        COUNT(CASE WHEN a.A_Type = 'P' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 AS Practical_Percentage,
+        IF(COUNT(CASE WHEN a.A_Type = 'P' AND a.A_Status = 'Present' THEN 1 END) / 15 * 100 >= 80, 'Eligible', 'Not Eligible') AS Practical_Eligibility
+    FROM 
+        ATTENDENCE a
+        JOIN attendance_eligibility ae ON ae.Stu_ID = a.Stu_ID
+    WHERE 
+        ae.Course_ID = input_Course_ID AND
+        (a.A_Status = 'Present' OR EXISTS (
+            SELECT 1 FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+        ))
+    GROUP BY 
+        ae.Course_ID, a.Stu_ID
+    ORDER BY 
+        a.Stu_ID;  -- Order by Student ID for better readability
+END //
+DELIMITER ;
 
+-- Call the procedure with the desired Course_ID
+CALL attendance_check_courseID('ICT1212');
+
+DROP PROCEDURE IF EXISTS attendance_check_courseID;
