@@ -212,7 +212,7 @@ ORDER BY
     a.Course_ID, a.Stu_ID;
 
 
--------------------------------------------    SHOW RESULTS--------------------------------------------------
+------------------------------------------- SHOW RESULTS--------------------------------------------------
 
 
 SELECT * FROM AttendanceBatchSummary WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
