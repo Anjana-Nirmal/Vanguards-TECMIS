@@ -42,10 +42,9 @@ FROM
 --    a.student_id=c.student_id AND c.course_code=a.course_code
 -- GROUP BY c.student_id,course_code;
 
----------------------------------------------------------
 
--- 80% eligibility without medical
 
+-----------------------------80% eligibility without medical----------------------------
 
 CREATE VIEW Attendance_Eligibility AS
 SELECT
@@ -64,29 +63,62 @@ GROUP BY
     STUDENT.Stu_ID, ATTENDENCE.Course_ID, ATTENDENCE.A_Type;
 
 	
-----------------------------------------------------------------
+---------------------------------ATTENDENCE _with_medical_80%------------------------------------------
 
--- 80% eligibility with  medical
 
--- CREATE VIEW Attendance_mediEligibility AS
--- SELECT
---     STUDENT.Stu_ID,
---     ATTENDENCE.Course_ID,
---     ATTENDENCE.A_Type,
---     (COUNT(CASE WHEN a.A_Status = 'Present' OR m.MED_ID IS NOT NULL THEN 1 END) / 15 * 100) AS "Percentage",
---     IF((COUNT(CASE WHEN a.A_Status = 'Present' OR m.MED_ID IS NOT NULL THEN 1 END) / 15 * 100) >= 80, "Eligible", "Not Eligible") AS "Eligibility"
--- FROM
---     ATTENDENCE ,STUDENT,MEDICAl
--- JOIN
---     STUDENT s ON a.Stu_ID = s.Stu_ID
--- LEFT JOIN
---     MEDICAL m ON a.Stu_ID = m.STU_ID 
---                AND a.Course_ID = m.Course_ID
---                AND a.A_DATE = m.SubmitDate
--- WHERE
---     s.S_Status = 'Proper'
--- GROUP BY
---     s.Stu_ID, a.Course_ID, a.A_Type;
+
+CREATE VIEW attendance_eligibility_summary AS
+SELECT 
+    a.Stu_ID,
+    a.Course_ID,
+    
+    -- Total attendance calculation with medical inclusion
+    (SUM(CASE 
+        WHEN a.A_Status = 'Present' THEN 1
+        WHEN EXISTS (
+            SELECT 1 FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+        ) THEN 1
+        ELSE 0 
+    END) / 30 * 100) AS Attendance_Percentage,
+
+    -- Eligibility classification based on attendance percentage
+    IF((SUM(CASE 
+        WHEN a.A_Status = 'Present' THEN 1
+        WHEN EXISTS (
+            SELECT 1 FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+        ) THEN 1
+        ELSE 0 
+    END) / 30 * 100) >= 80, 'Eligible', 'Not Eligible') AS Attendance_Eligibility,
+
+    -- Attendance with medical considerations
+    COUNT(CASE 
+        WHEN a.A_Status = 'Present' OR EXISTS (
+            SELECT 1 FROM MEDICAL m 
+            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+        ) THEN 1 
+        ELSE NULL 
+    END) AS Total_Attendance_Count,
+
+    -- Final attendance eligibility status
+    CASE 
+        WHEN COUNT(CASE 
+            WHEN a.A_Status = 'Present' OR EXISTS (
+                SELECT 1 FROM MEDICAL m 
+                WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
+            ) THEN 1 
+            ELSE NULL 
+        END) >= 12 
+            THEN 'Medical Eligible'
+        ELSE 'Medical Not Eligible'
+    END AS Medical_Eligibility
+
+FROM 
+    ATTENDENCE a
+GROUP BY 
+    a.Stu_ID, a.Course_ID;
+
 
 
 	
@@ -122,7 +154,7 @@ FROM
 WHERE 
     SUBSTRING(Stu_ID, 4, 4) = '2022';
 
----------------------------------------  procedure-------------------------------
+----------------------------------------procedure-------------------------------
 
 DELIMITER //
 CREATE PROCEDURE attendance_check_courseID(IN input_Course_ID VARCHAR(20))
