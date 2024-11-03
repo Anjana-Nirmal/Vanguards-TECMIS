@@ -313,3 +313,73 @@ END //
 DELIMITER ;
 
 CALL GetAttendanceByStudentAndCourse('TG/2022/1348', 'ICT1212');
+
+----------------------------------------------------------------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE GetStudentAttendanceDetails(
+    IN input_Course_ID VARCHAR(20),
+    IN input_Stu_ID VARCHAR(20)
+)
+BEGIN
+    DECLARE has_theory BOOLEAN DEFAULT FALSE;
+    DECLARE has_practical BOOLEAN DEFAULT FALSE;
+
+    
+    IF EXISTS (SELECT 1 FROM ATTENDENCE 
+               WHERE Course_ID = input_Course_ID AND Stu_ID = input_Stu_ID AND A_Type = 'T') THEN
+        SET has_theory = TRUE;
+    END IF;
+
+    
+    IF EXISTS (SELECT 1 FROM ATTENDENCE 
+               WHERE Course_ID = input_Course_ID AND Stu_ID = input_Stu_ID AND A_Type = 'P') THEN
+        SET has_practical = TRUE;
+    END IF;
+
+    
+    IF has_theory = TRUE AND has_practical = FALSE THEN
+        -- Theory-only course
+        SELECT 
+            ae.Course_ID,
+            ae.Stu_ID,
+            ae.Attendance_Percentage AS Percentage,
+            'Theory' AS A_Type
+        FROM 
+            attendance_eligibility_summary ae
+        WHERE 
+            ae.Course_ID = input_Course_ID AND ae.Stu_ID = input_Stu_ID;
+    
+    ELSEIF has_theory = FALSE AND has_practical = TRUE THEN
+        -- Practical-only course
+        SELECT 
+            ae.Course_ID,
+            ae.Stu_ID,
+            ae.Attendance_Percentage AS Percentage,
+            'Practical' AS A_Type
+        FROM 
+            attendance_eligibility_summary ae
+        WHERE 
+            ae.Course_ID = input_Course_ID AND ae.Stu_ID = input_Stu_ID;
+
+    ELSEIF has_theory = TRUE AND has_practical = TRUE THEN
+       
+        SELECT 
+            ae.Course_ID,
+            ae.Stu_ID,
+            ae.Attendance_Percentage AS Percentage,
+            'Theory/Practical' AS A_Type
+        FROM 
+            attendance_eligibility_summary ae
+        WHERE 
+            ae.Course_ID = input_Course_ID AND ae.Stu_ID = input_Stu_ID;
+    ELSE
+        
+        SELECT 'No attendance records found for the specified course and student' AS Message;
+    END IF;
+END //
+
+DELIMITER ;
+
+CALL GetStudentAttendanceDetails('ICT1222', 'TG/2022/1356');
