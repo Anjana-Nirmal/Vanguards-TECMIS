@@ -329,37 +329,5 @@ STUDENT_COURSE(
 
 -------------------------------------------------------------------------------
 
-STUDENT_ELIGIBILITY(
- Stu_ID VARCHAR(20),
- ELI_ID VARCHAR(20),
- PRIMARY KEY(Stu_ID, ELI_ID),
- FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID),
- FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID)
-);
 
-+--------+-------------+------+-----+---------+-------+
-| Field  | Type        | Null | Key | Default | Extra |
-+--------+-------------+------+-----+---------+-------+
-| Stu_ID | varchar(20) | NO   | PRI | NULL    |       |
-| ELI_ID | varchar(20) | NO   | PRI | NULL    |       |
-+--------+-------------+------+-----+---------+-------+
 
--------------------------------------------------------------------------------
-
-ATTENDENCE_ELIGIBILITY(
- ELI_ID VARCHAR(20),
- COURSE_ID VARCHAR(20),
- Stu_ID VARCHAR(20),
- PRIMARY KEY(ELI_ID, Course_ID, Stu_ID),
- FOREIGN KEY(ELI_ID) REFERENCES ELIGIBILITY(ELI_ID),
- FOREIGN KEY(COURSE_ID) REFERENCES COURSE_UNIT(Course_ID),
- FOREIGN KEY(Stu_ID) REFERENCES STUDENT(Stu_ID)
-);
-
-+-----------+-------------+------+-----+---------+-------+
-| Field     | Type        | Null | Key | Default | Extra |
-+-----------+-------------+------+-----+---------+-------+
-| ELI_ID    | varchar(20) | NO   | PRI | NULL    |       |
-| COURSE_ID | varchar(20) | NO   | PRI | NULL    |       |
-| Stu_ID    | varchar(20) | NO   | PRI | NULL    |       |
-+-----------+-------------+------+-----+---------+-------+
