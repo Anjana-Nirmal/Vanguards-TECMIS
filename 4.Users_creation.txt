@@ -1,0 +1,63 @@
+
+--User Admin
+
+CREATE USER 'Admin'@'localhost'
+IDENTIFIED BY 'u123';
+
+GRANT ALL PRIVILEGES ON tecmis.* TO 'Admin'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+ 
+ 
+
+--User Dean
+
+CREATE USER 'Dean'@'localhost'
+IDENTIFIED BY 'D123';
+
+GRANT ALL PRIVILEGES ON tecmis.* TO 'Dean'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
+
+
+
+--User Lecturer
+
+CREATE USER 'Lecturer'@'localhost'
+IDENTIFIED BY 'L123';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER ON tecmis.* TO 'Lecturer'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
+
+
+
+--User Technical officer
+
+CREATE USER 'Technical officer'@'localhost'
+IDENTIFIED BY 'to123';
+
+GRANT SELECT, INSERT, UPDATE ON tecmis.ATTENDENCE TO 'TechnicalOfficer'@'localhost';
+
+GRANT SELECT, INSERT, UPDATE ON tecmis.ATTENDENCE, tecmis.ATTENDANCE_SUMMARY TO 'TechnicalOfficer'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
+
+
+
+--User Student
+
+CREATE USER 'Student'@'localhost'
+IDENTIFIED BY 's123';
+
+GRANT SELECT ON tecmis.FINAL_ATTENDANCE TO 'Student'@'localhost';
+GRANT SELECT ON tecmis.FINAL_GRADES TO 'Student'@'localhost';
+
+FLUSH PRIVILEGES;
