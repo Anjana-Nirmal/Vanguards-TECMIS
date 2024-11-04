@@ -1,0 +1,219 @@
+
+----------------------------------------View for Quiz marks----------------------------------------------------
+
+
+CREATE VIEW QUIZ_mark AS
+SELECT 
+    Stu_ID,
+    Course_ID,
+    (((Quiz_1 + Quiz_2 + Quiz_3) - LEAST(Quiz_1, Quiz_2, Quiz_3)) / 200) * 10 AS final_quiz_mark
+FROM 
+    exam_mark;
+
+-- Create the CA_marks_view to calculate the Continuous Assessment (CA) marks based on the course type
+CREATE VIEW CA_marks_view AS
+SELECT	
+    e.Stu_ID,
+    e.Course_ID,
+    CASE
+
+        WHEN e.Course_ID IN ('ICT1212', 'ENG1222', 'TCS1212') THEN 
+            (q.final_quiz_mark) + (e.mid_Theory * 0.20)
+   
+        WHEN e.Course_ID IN ('ICT1222', 'ICT1233', 'ICT1242', 'ICT1253', 'TCS1233') THEN 
+            (q.final_quiz_mark) + ((e.Assesment / 100) * 10) + ((e.mid_Theory + e.mid_Practical) / 200) * 20
+        ELSE 
+            0
+    END AS CA_marks
+FROM 
+    exam_mark e
+JOIN 
+    QUIZ_mark q ON e.Stu_ID = q.Stu_ID AND e.Course_ID = q.Course_ID;
+
+-- Create the CA_marks_eligible view to determine eligibility based on CA marks with the Eligibility_Status column
+CREATE VIEW CA_marks_eligible AS
+SELECT	
+    Stu_ID,
+    Course_ID,
+    CA_marks,
+    CASE 
+        WHEN CA_marks >= 20 THEN 'Eligible'
+        ELSE 'Not Eligible'
+    END AS Eligibility_Status
+FROM 
+    CA_marks_view;
+
+
+
+------------------------------------------Summary for the Whole Batch----------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE CA_Summary(
+    IN p_Course_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        Stu_ID,
+        Quiz_1,
+        Quiz_2,
+        Quiz_3,
+        Assesment,
+        mid_Theory,
+        mid_Practical
+
+    FROM 
+        EXAM_MARK
+    WHERE 
+        Course_ID = p_Course_ID;
+END //
+
+DELIMITER ;
+
+CALL CA_Summary('ICT1242');
+
+
+
+------------------------------------Individual Student Details by Course Code and Registration Number-----------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE GetIndividualCAMarks(
+    IN p_Course_ID VARCHAR(20),
+    IN p_Stu_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        Stu_ID,
+	Course_ID,
+        Quiz_1,
+        Quiz_2,
+        Quiz_3,
+        Assesment,
+        mid_Theory,
+        mid_Practical
+
+    FROM 
+        EXAM_MARK
+    WHERE 
+        Course_ID = p_Course_ID AND
+        Stu_ID = p_Stu_ID;
+END //
+
+DELIMITER ;
+
+CALL GetIndividualCAMarks('ICT1212', 'TG/2022/1357');
+
+
+
+
+--------------------------------------Summary for a Specific Student---------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE GetStudentCAMarksSummary(
+    IN p_Stu_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        Course_ID,
+        Quiz_1,
+        Quiz_2,
+        Quiz_3,
+        Assesment,
+        mid_Theory,
+        mid_Practical
+    FROM 
+        EXAM_MARK
+    WHERE 
+        Stu_ID = p_Stu_ID;
+END //
+
+DELIMITER ;
+
+CALL GetStudentCAMarksSummary('TG/2022/1357');
+
+
+
+
+--------------------------------Procedure to Get Final Marks for an Individual Student--------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE GetIndividualFinalMarks(
+    IN p_Stu_ID VARCHAR(20),
+    IN p_Course_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        Stu_ID,
+        Course_ID,
+        (Quiz_1 + Quiz_2 + Quiz_3 + Assesment + mid_Theory + mid_Practical + end_Theory + end_Practical) / 8 AS Final_Marks
+    FROM 
+        EXAM_MARK
+    WHERE 
+        Stu_ID = p_Stu_ID AND
+        Course_ID = p_Course_ID;
+END //
+
+DELIMITER ;
+
+CALL GetIndividualFinalMarks('TG/2022/1357', 'ICT1212');
+
+
+
+
+--------------------------------Procedure to Get Final Marks for the Whole Batch----------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE GetBatchFinalMarks(
+    IN p_Course_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        Stu_ID,
+        Course_ID,
+        (Quiz_1 + Quiz_2 + Quiz_3 + Assesment + mid_Theory + mid_Practical + end_Theory + end_Practical) / 8 AS Final_Marks
+    FROM 
+        EXAM_MARK
+    WHERE 
+        Course_ID = p_Course_ID;
+END //
+
+DELIMITER ;
+
+CALL GetBatchFinalMarks('ICT1212');
+
+
+
+----------------------------------------Procedure to Check Eligibility--------------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE CheckStudentEligibility(
+    IN p_Course_ID VARCHAR(20)
+)
+BEGIN
+    SELECT 
+        Stu_ID,
+        Course_ID,
+        (Quiz_1 + Quiz_2 + Quiz_3 + Assesment + mid_Theory + mid_Practical) / 6 AS Average_Marks,
+        CASE 
+            WHEN (Quiz_1 + Quiz_2 + Quiz_3 + Assesment + mid_Theory + mid_Practical) / 6 >= 50 THEN 'Eligible'
+            ELSE 'Not Eligible'
+        END AS Eligibility
+    FROM 
+        EXAM_MARK
+    WHERE 
+        Course_ID = p_Course_ID;
+END //
+
+DELIMITER ;
+
+CALL CheckStudentEligibility('ICT1253');
+
+
+
+
+
