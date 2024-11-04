@@ -63,6 +63,9 @@ GROUP BY
     STUDENT.Stu_ID, ATTENDENCE.Course_ID, ATTENDENCE.A_Type;
 
 
+    SELECT * FROM Attendance_Eligibility;
+
+
 -----------------------------80% eligibility with the medical------------------------------
 
 CREATE VIEW attendance_eligibility_with_medical AS
@@ -99,6 +102,8 @@ GROUP BY
     a.Stu_ID, a.Course_ID;
 
 
+
+SELECT * FROM attendance_eligibility_with_medical;
 	
 ---------------------------------ATTENDENCE _Summary whole batch------------------------------------------
 
@@ -165,8 +170,26 @@ DROP view attendance_eligibility_summary;
 SELECT * FROM attendance_eligibility_summary WHERE Course_ID = 'ICT1212' AND Stu_ID = 'TG/2022/1348';
 
 
+-----------------------------------------
 
+CREATE VIEW attendance_summary AS
+SELECT 
+    a.Course_ID,
+    a.Stu_ID,
+    COUNT(CASE WHEN a.A_Status = 'Present' THEN 1 END) AS Present_Count,
+    COUNT(*) AS Total_Sessions,
+    ROUND(COUNT(CASE WHEN a.A_Status = 'Present' THEN 1 END) * 100.0 / COUNT(*), 4) AS Percentage,
+    CASE
+        WHEN COUNT(CASE WHEN a.A_Status = 'Present' THEN 1 END) * 100.0 / COUNT(*) >= 80 THEN 'Eligible'
+        ELSE 'Not Eligible'
+    END AS Eligibility
+FROM 
+    ATTENDENCE a
+GROUP BY 
+    a.Course_ID, 
+    a.Stu_ID;
 
+SELECT * FROM attendance_summary;
 
 -------------------SLECT  Not eligible (without medical ) --------------------------------
 CREATE VIEW Not_Eligible_Students AS
@@ -184,6 +207,12 @@ WHERE
 
 SELECT * FROM Not_Eligible_Students;
 
+-------------------SLECT  Not eligible (without medical ) --------------------
+
+
+SELECT *
+FROM attendance_eligibility
+WHERE Medical_With_Eligibility = 'Not Eligible';
 	
 -----------------selct eligible (without medicle)------------------------
 SELECT *
@@ -385,4 +414,13 @@ DELIMITER ;
 CALL GetStudentAttendanceDetails('ICT1222', 'TG/2022/1356');
 
 
+--------------------------------------------------------------------------
+-- -- Step 1: Add the new 'eligibility_presentage' column to 'attendance_eligibility_summary' table
+-- ALTER TABLE attendance_eligibility_summary 
+-- ADD COLUMN Attendance_Percentage DECIMAL(5, 2);
 
+-- -- Step 2: Copy 'Attendance_Percentage' values from 'attendance_eligibility' to 'eligibility_presentage' in 'attendance_eligibility_summary'
+-- UPDATE attendance_eligibility_summary AS aes
+-- JOIN attendance_eligibility AS ae
+-- ON aes.Course_ID = ae.Course_ID AND aes.Stu_ID = ae.Stu_ID
+-- SET aes.Attendance_Percentage = ae.Percentage;
