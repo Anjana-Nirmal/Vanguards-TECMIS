@@ -1,6 +1,7 @@
 -------------------------------------------Grade students-----------------------------------------------
 
 
+
 CREATE VIEW StudentGrades AS
 SELECT 
     se.Stu_ID,
@@ -8,14 +9,18 @@ SELECT
     se.CA_marks,
     se.Attendance_percentage,
     CASE 
-        WHEN se.Attendance_percentage >= 80 AND se.CA_marks >= 50 THEN 'A'
-        WHEN se.Attendance_percentage >= 70 AND se.CA_marks >= 50 THEN 'B'
-        WHEN se.Attendance_percentage >= 60 AND se.CA_marks >= 50 THEN 'C'
-        WHEN se.Attendance_percentage >= 50 AND se.CA_marks >= 50 THEN 'D'
+        WHEN se.Attendance_percentage >= 80 AND se.Final_marks >= 75 THEN 'A'
+        WHEN se.Attendance_percentage >= 70 AND se.Final_marks >= 65 THEN 'B'
+        WHEN se.Attendance_percentage >= 60 AND se.Final_marks >= 55 THEN 'C'
+        WHEN se.Attendance_percentage >= 50 AND se.Final_marks >= 45 THEN 'D'
         ELSE 'F'
     END AS Grade
 FROM 
-    STUDENT_ELIGIBILITY se;
+    STUDENT_ELIGIBILITY se
+JOIN
+    GetIndividualFinalMarks im
+ON
+    se.Stu_ID = im.Stu_ID;
 
 
 
