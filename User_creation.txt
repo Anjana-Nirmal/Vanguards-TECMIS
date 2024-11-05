@@ -1,0 +1,83 @@
+-------------------------TECMIS DATABASE-----------------------------
+
+SHOW GRANTS FOR 'USERNAME'@'LOCALHOST';
+
+//Login root user
+
+mysql -u root -p
+Enter password: ****
+
+CREATE DATABASE vanguards;
+
+--Create Admin with password
+
+CREATE USER 'Admin'@'localhost' IDENTIFIED BY 'adminpwd';
+
+GRANT ALL PRIVILEGES ON vanguards.*
+TO 'Admin'@'localhost'
+WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+--Create Dean with password
+
+CREATE USER 'Dean'@'localhost' IDENTIFIED BY 'deanpwd';
+
+GRANT ALL PRIVILEGES ON vanguards.* 
+TO 'Dean'@'localhost';
+
+FLUSH PRIVILEGES;
+
+--Create Lecturer with password
+
+CREATE USER 'Lecturer'@'localhost' IDENTIFIED BY 'lecturerpwd';
+
+GRANT ALL PRIVILEGES ON vanguards.* 
+TO 'Lecturer'@'localhost';
+
+FLUSH PRIVILEGES;
+
+--------------------------------------------------------------------------------
+
+--Create Technical officer with password
+
+CREATE USER 'Technicalofficer'@'localhost' IDENTIFIED BY 'techpwd';
+
+CREATE user 'Technicalofficer'@'localhost' IDENTIFIED BY 'techpwd';
+GRANT SELECT, INSERT, UPDATE ON vanguards.attendance TO 'Technical_officer'@'localhost';
+
+
+GRANT EXECUTE ON PROCEDURE vanguards.GetOverallAttendanceByStudent TO 'TechnicalOfficer'@'localhost';
+GRANT EXECUTE ON PROCEDURE vanguards.GetStudentAttendanceDetails TO 'TechnicalOfficer'@'localhost';
+GRANT EXECUTE ON PROCEDURE vanguards.GetAttendaceByStudentAndCourse TO 'TechnicalOfficer'@'localhost';
+
+GRANT SELECT,SHOW VIEW,INSERT,UPDATE ON vanguards.attendance_eligibility TO 'TechnicalOfficer'@'localhost';
+GRANT SELECT,SHOW VIEW,INSERT,UPDATE ON vanguards.attendance_eligibility_summary TO 'TechnicalOfficer'@'localhost';
+GRANT SELECT,SHOW VIEW,INSERT,UPDATE ON vanguards.attendance_eligibility_with_medical TO 'TechnicalOfficer'@'localhost';
+
+
+FLUSH PRIVILEGES;
+
+
+--Create Student with password
+
+CREATE USER 'Student'@'localhost' IDENTIFIED BY 'studentpwd';
+CREATE USER 'Student'@'localhost'
+IDENTIFIED BY 'studentpwd';
+
+GRANT SELECT ON vanguards.attendence TO 'Student'@'localhost';
+
+GRANT SELECT,SHOW VIEW ON  vanguards.ca_marks_eligible  TO 'Student'@'localhost';
+GRANT SELECT,SHOW VIEW ON  vanguards.ca_marks_view  TO 'Student'@'localhost';
+GRANT SELECT,SHOW VIEW ON  vanguards.cgpa_view TO 'Student'@'localhost';
+GRANT SELECT,SHOW VIEW ON  vanguards.gradessummary TO 'Student'@'localhost';
+GRANT SELECT,SHOW VIEW ON  vanguards.markssummary TO 'Student'@'localhost';
+
+GRANT EXECUTE ON PROCEDURE vanguards.GetBatchFinalMarks TO 'Student'@'localhost';
+GRANT EXECUTE ON PROCEDURE vanguards.GetIndividualCAMarks TO 'Student'@'localhost';
+GRANT EXECUTE ON PROCEDURE vanguards.GetIndividualFinalMarks TO 'Student'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
+FLUSH PRIVILEGES;
