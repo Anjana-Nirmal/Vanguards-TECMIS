@@ -190,6 +190,7 @@ GROUP BY
 
 SELECT * FROM attendance_summary;
 
+
 SELECT DISTINCT *
 FROM attendance_summary;
 
