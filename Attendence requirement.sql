@@ -190,21 +190,24 @@ GROUP BY
 
 SELECT * FROM attendance_summary;
 
--------------------SLECT  Not eligible (without medical ) --------------------------------
-CREATE VIEW Not_Eligible_Students AS
-SELECT 
-    Stu_ID,
-    Course_ID,
-    A_Type,
-    Percentage,
-    Eligibility
-FROM 
-    attendance_eligibility
-WHERE 
-    (Percentage < 80 OR (A_Type = 'M' AND Percentage < 80)) 
-    AND Eligibility = 'Not Eligible';  
+-- -------------------SLECT  Not eligible (without medical ) --------------------------------
+-- CREATE VIEW Not_Eligible_Students AS
+-- SELECT 
+--     Stu_ID,
+--     Course_ID,
+--     A_Type,
+--     Percentage,
+--     Eligibility
+-- FROM 
+--     attendance_eligibility
+-- WHERE 
+--     (Percentage < 80 OR (A_Type = 'M' AND Percentage < 80)) 
+--     AND Eligibility = 'Not Eligible';  
 
-SELECT * FROM Not_Eligible_Students;
+-- SELECT * FROM Not_Eligible_Students;
+
+-- DROP VIEW Not_Eligible_Students;
+
 
 -------------------SLECT  Not eligible (without medical ) --------------------
 
