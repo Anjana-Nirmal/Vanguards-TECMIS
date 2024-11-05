@@ -190,6 +190,10 @@ GROUP BY
 
 SELECT * FROM attendance_summary;
 
+SELECT DISTINCT *
+FROM attendance_summary;
+
+
 -- -------------------SLECT  Not eligible (without medical ) --------------------------------
 -- CREATE VIEW Not_Eligible_Students AS
 -- SELECT 
@@ -283,9 +287,9 @@ BEGIN
         ae.Stu_ID,
         a.A_DATE,
         ae.Attendance_Percentage AS Percentage,
-        ae.Medical_with_Eligibility AS Eligibility
+        ae. Medical_With_Eligibility AS Eligibility
     FROM 
-        attendance_eligibility_summary ae
+        attendance_eligibility_summary; ae
         JOIN ATTENDENCE a ON ae.Stu_ID = a.Stu_ID AND ae.Course_ID = a.Course_ID
     WHERE 
         ae.Course_ID = input_Course_ID
@@ -301,7 +305,7 @@ DROP PROCEDURE GetAttendanceByCourse;
 
 --------------------------------------------------------------------------------------
 
-DELIMITER //
+DELIMITER //  _eligibility
 
 CREATE PROCEDURE GetOverallAttendanceByStudent(IN input_Stu_ID VARCHAR(20))
 BEGIN
@@ -322,7 +326,7 @@ DELIMITER ;
 
 CALL GetOverallAttendanceByStudent('TG/2022/1348');
 
----------------------------------------------------------------------------------
+---------------------------------------percentage and eligibility ------------------------------------------
 DELIMITER //
 
 CREATE PROCEDURE GetAttendanceByStudentAndCourse(IN input_Stu_ID VARCHAR(20), IN input_Course_ID VARCHAR(20))
@@ -345,7 +349,7 @@ DELIMITER ;
 
 CALL GetAttendanceByStudentAndCourse('TG/2022/1348', 'ICT1212');
 
-----------------------------------------------------------------------------------------------------
+-------------------------------------display the precentage and a_type---------------------------------------------------------------
 
 DELIMITER //
 
