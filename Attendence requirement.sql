@@ -269,7 +269,7 @@ SELECT
     Course_ID,
     Eligibility
 FROM 
-     attendance_eligibility
+     attendance_eligibility_summary
 WHERE 
     SUBSTRING(Stu_ID, 4, 4) = '2022';
 
