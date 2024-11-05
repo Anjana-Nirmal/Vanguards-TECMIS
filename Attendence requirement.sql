@@ -81,7 +81,7 @@ SELECT
             WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
         ) THEN 1
         ELSE 0 
-    END) / 30 * 100) AS Attendance_Percentage,
+    END) / 15 * 100) AS Attendance_Percentage,
 
     -- Final attendance eligibility status based on medical considerations
     CASE 
@@ -104,6 +104,8 @@ GROUP BY
 
 
 SELECT * FROM attendance_eligibility_with_medical;
+
+DROP VIEW attendance_eligibility_with_medical;
 	
 ---------------------------------ATTENDENCE _Summary whole batch------------------------------------------
 
@@ -114,7 +116,7 @@ SELECT
     a.Stu_ID,
     a.Course_ID,
     
-    
+    -- Attendance Percentage including medical
     (SUM(CASE 
         WHEN a.A_Status = 'Present' THEN 1
         WHEN EXISTS (
@@ -122,19 +124,15 @@ SELECT
             WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
         ) THEN 1
         ELSE 0 
-    END) / 30 * 100) AS Attendance_Percentage,
+    END) / 15 * 100) AS Attendance_Percentage,
 
-    
+    -- Attendance Eligibility WITHOUT medical check
     IF((SUM(CASE 
         WHEN a.A_Status = 'Present' THEN 1
-        WHEN EXISTS (
-            SELECT 1 FROM MEDICAL m 
-            WHERE m.Stu_ID = a.Stu_ID AND m.Course_ID = a.Course_ID AND m.SubmitDate = a.A_DATE
-        ) THEN 1
         ELSE 0 
-    END) / 30 * 100) >= 80, 'Eligible', 'Not Eligible') AS Attendance_Eligibility,
+    END) / 15 * 100) >= 80, 'Eligible', 'Not Eligible') AS Attendance_Eligibility,
 
-    
+    -- Total attendance count including medical
     COUNT(CASE 
         WHEN a.A_Status = 'Present' OR EXISTS (
             SELECT 1 FROM MEDICAL m 
@@ -143,7 +141,7 @@ SELECT
         ELSE NULL 
     END) AS Total_Attendance_Count,
 
-    
+    -- Medical-based Eligibility
     CASE 
         WHEN COUNT(CASE 
             WHEN a.A_Status = 'Present' OR EXISTS (
@@ -160,6 +158,7 @@ FROM
     ATTENDENCE a
 GROUP BY 
     a.Stu_ID, a.Course_ID;
+
 
 
 SELECT * FROM attendance_eligibility_summary;
