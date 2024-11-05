@@ -1,0 +1,197 @@
+-------------------------------------------Grade students-----------------------------------------------
+
+
+CREATE VIEW StudentGrades AS
+SELECT 
+    se.Stu_ID,
+    se.Course_ID,
+    se.CA_marks,
+    se.Attendance_percentage,
+    CASE 
+        WHEN se.Attendance_percentage >= 80 AND se.CA_marks >= 50 THEN 'A'
+        WHEN se.Attendance_percentage >= 70 AND se.CA_marks >= 50 THEN 'B'
+        WHEN se.Attendance_percentage >= 60 AND se.CA_marks >= 50 THEN 'C'
+        WHEN se.Attendance_percentage >= 50 AND se.CA_marks >= 50 THEN 'D'
+        ELSE 'F'
+    END AS Grade
+FROM 
+    STUDENT_ELIGIBILITY se;
+
+
+
+
+----------------------See marks for each subject, student and as a whole batch-----------------------------
+
+
+CREATE VIEW MarksSummary AS
+SELECT 
+    em.Stu_ID,
+    em.Course_ID,
+    em.Quiz_1,
+    em.Quiz_2,
+    em.Quiz_3,
+    em.Assesment,
+    em.mid_Theory,
+    em.mid_Practical,
+    em.end_Theory,
+    em.end_Practical,
+    (GREATEST(em.Quiz_1, em.Quiz_2, em.Quiz_3) + 
+     LEAST(GREATEST(em.Quiz_1, em.Quiz_2), GREATEST(em.Quiz_1, em.Quiz_3), GREATEST(em.Quiz_2, em.Quiz_3)) + 
+     em.Assesment + 
+     em.mid_Theory + 
+     em.mid_Practical + 
+     em.end_Theory + 
+     em.end_Practical) / 7 AS Final_Mark
+FROM 
+    EXAM_MARK em;
+
+
+----------To View Marks for a Specific Student----------
+
+SELECT * 
+FROM MarksSummary 
+WHERE Stu_ID = 'TG/2022/1353';
+
+
+
+---------To View Marks for a Specific Course-------------
+
+SELECT * 
+FROM MarksSummary 
+WHERE Course_ID = 'ICT1253';
+
+
+---------To View All Marks for the Whole Batch-----------
+
+SELECT * 
+FROM MarksSummary;
+
+
+
+
+---------------------------------see Grades for each subject, student and as a whole batch------------------------------------
+
+CREATE VIEW GradeSummary AS
+SELECT 
+    em.Stu_ID,
+    em.Course_ID,
+    (GREATEST(em.Quiz_1, em.Quiz_2, em.Quiz_3) + 
+     LEAST(GREATEST(em.Quiz_1, em.Quiz_2), GREATEST(em.Quiz_1, em.Quiz_3), GREATEST(em.Quiz_2, em.Quiz_3)) + 
+     em.Assesment + 
+     em.mid_Theory + 
+     em.mid_Practical + 
+     em.end_Theory + 
+     em.end_Practical) / 7 AS Final_Mark,
+    CASE 
+        WHEN (GREATEST(em.Quiz_1, em.Quiz_2, em.Quiz_3) + 
+              LEAST(GREATEST(em.Quiz_1, em.Quiz_2), GREATEST(em.Quiz_1, em.Quiz_3), GREATEST(em.Quiz_2, em.Quiz_3)) + 
+              em.Assesment + 
+              em.mid_Theory + 
+              em.mid_Practical + 
+              em.end_Theory + 
+              em.end_Practical) / 7 >= 80 THEN 'A'
+        WHEN (GREATEST(em.Quiz_1, em.Quiz_2, em.Quiz_3) + 
+              LEAST(GREATEST(em.Quiz_1, em.Quiz_2), GREATEST(em.Quiz_1, em.Quiz_3), GREATEST(em.Quiz_2, em.Quiz_3)) + 
+              em.Assesment + 
+              em.mid_Theory + 
+              em.mid_Practical + 
+              em.end_Theory + 
+              em.end_Practical) / 7 >= 70 THEN 'B'
+        WHEN (GREATEST(em.Quiz_1, em.Quiz_2, em.Quiz_3) + 
+              LEAST(GREATEST(em.Quiz_1, em.Quiz_2), GREATEST(em.Quiz_1, em.Quiz_3), GREATEST(em.Quiz_2, em.Quiz_3)) + 
+              em.Assesment + 
+              em.mid_Theory + 
+              em.mid_Practical + 
+              em.end_Theory + 
+              em.end_Practical) / 7 >= 60 THEN 'C'
+        WHEN (GREATEST(em.Quiz_1, em.Quiz_2, em.Quiz_3) + 
+              LEAST(GREATEST(em.Quiz_1, em.Quiz_2), GREATEST(em.Quiz_1, em.Quiz_3), GREATEST(em.Quiz_2, em.Quiz_3)) + 
+              em.Assesment + 
+              em.mid_Theory + 
+              em.mid_Practical + 
+              em.end_Theory + 
+              em.end_Practical) / 7 >= 50 THEN 'D'
+        ELSE 'F'
+    END AS Grade
+FROM 
+    EXAM_MARK em;
+
+
+---------To View Grades for a Specific Student-------------
+
+SELECT * 
+FROM GradeSummary 
+WHERE Stu_ID = 'TG/2022/1353';
+
+
+---------To View Grades for a Specific Course--------------
+
+SELECT * 
+FROM GradeSummary 
+WHERE Course_ID = 'ICT1253';
+
+
+----------To View All Grades for the Whole Batch------------
+
+SELECT * 
+FROM GradeSummary;
+
+
+
+
+--------------------------------------------------View for SGPA Calculation------------------------------------------------
+
+CREATE VIEW SGPA_View AS
+SELECT 
+    gs.Stu_ID,
+    SUM(cu.Credit * gs.Grade) AS Total_Grade_Points, 
+    SUM(cu.Credit) AS Total_Credits,                 
+    CASE 
+        WHEN SUM(cu.Credit) > 0 THEN SUM(cu.Credit * gs.Grade) / SUM(cu.Credit) 
+        ELSE 0 
+    END AS SGPA                            
+FROM 
+    GradeSummary gs
+JOIN 
+    COURSE_UNIT cu ON gs.Course_ID = cu.Course_ID
+GROUP BY 
+    gs.Stu_ID;
+
+
+
+
+
+--------To View SGPA for Each Student------------
+
+SELECT * FROM SGPA_View;
+
+
+
+
+
+
+
+
+--------------------------------------------------View for CGPA Calculation---------------------------------------------
+
+CREATE VIEW CGPA_View AS
+SELECT 
+    sg.Stu_ID,
+    SUM(sg.Total_Grade_Points) / SUM(sg.Total_Credits) AS CGPA
+FROM 
+    SGPA_View sg
+GROUP BY 
+    sg.Stu_ID;
+
+
+
+
+------------------To View CGPA for Each Student----------------------
+
+SELECT * 
+FROM CGPA_View;
+
+
+
+
+
